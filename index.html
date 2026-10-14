@@ -34,6 +34,11 @@ th.l{text-align:left}.hmc{font-variant-numeric:tabular-nums;text-align:center}
 .lg{min-height:100vh;display:grid;place-items:center;padding:16px}.lgc{width:100%;max-width:380px;margin:0}.lgc h1{font-size:21px}
 .lgc input{font:inherit;width:100%;padding:10px 12px;margin:14px 0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);letter-spacing:2px;text-transform:uppercase}
 .lgc button{width:100%;padding:10px}#le{color:var(--ko);font-size:13px;min-height:18px;margin:8px 0 0}
+.tg{cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;border-radius:4px}.tg:hover{color:var(--acc)}.tg:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.tg::before{content:'';flex:none;width:7px;height:7px;margin:0 3px 3px 1px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .15s;opacity:.7}
+.card.col .tg::before{transform:rotate(-45deg);margin-bottom:0}.card.col{padding-top:12px;padding-bottom:12px}.card.col h2{margin:0}
+.card.col>:not(.hd),.card.col .hd :is(p,label,button,select){display:none!important}.grid2{align-items:start}
+.tbx{margin-left:auto;display:flex;gap:6px;align-items:center}
 .ah{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start}#t3 td{text-align:left;vertical-align:middle}#t3 td.c,#t3 th.c{text-align:center}#t3 tbody tr{cursor:default}#t3 tbody tr:hover{background:none}
 .ai{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);width:180px}.ac{width:70px;text-align:center;letter-spacing:3px;font-variant-numeric:tabular-nums}
 .sb{font:inherit;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}.sb:disabled{opacity:.45;cursor:not-allowed}.sb.del{color:var(--ko)}
@@ -48,7 +53,7 @@ th.l{text-align:left}.hmc{font-variant-numeric:tabular-nums;text-align:center}
 <label>Mes<select id="fm"></select></label><label>Semana<select id="fw"></select></label><label>Planta<select id="fp"></select></label>
 <label class="up" id="xl" hidden style="flex-direction:row;align-items:center;margin-left:auto;color:#fff">Actualizar con nuevo Excel<input id="file" type="file" accept=".xlsx,.xlsm" hidden></label>
 <span id="msg"></span></div>
-<div class="tabs"><button id="b1" aria-pressed="true">Indicadores</button><button id="b2" aria-pressed="false">Costos, repuestos y alertas</button><button id="b3" aria-pressed="false" hidden>Administración</button></div>
+<div class="tabs"><button id="b1" aria-pressed="true">Indicadores</button><button id="b2" aria-pressed="false">Costos y repuestos</button><button id="b3" aria-pressed="false" hidden>Administración</button><span class="tbx"><button class="sb" id="xa" type="button">Desplegar todo</button><button class="sb" id="xc" type="button">Contraer todo</button></span></div>
 <div id="t1">
 <section class="kpis" id="kpis"></section>
 <section class="card"><h2>Semáforo por planta</h2><p class="cap">Haz clic en una planta para ver sus objetos técnicos. Metas «Bueno»: TMEF ≥16 h, TMPR ≤20 min, disponibilidad ≥98,5%, confiabilidad ≥98%.</p>
@@ -57,6 +62,9 @@ th.l{text-align:left}.hmc{font-variant-numeric:tabular-nums;text-align:center}
 <section class="card"><h2 id="pt"></h2><p class="cap">Ordenado de mayor a menor. El % es sobre las horas de parada del período seleccionado; los objetos técnicos y sus horas salen de los avisos IW28 (Parada = X). Haz clic en una planta para detallarla.</p>
 <div class="scroll"><table id="ptb"></table></div>
 <h2 style="margin-top:16px">Pareto de paradas por planta</h2><p class="cap">Barras: horas de parada. Curva: % acumulado. Línea punteada: 80%.</p><svg id="pc" viewBox="0 0 640 300" role="img" aria-label="Pareto de paradas por planta"></svg></section>
+<section class="card"><h2>Alertas de análisis de fallas</h2><p class="cap" id="ac"></p>
+<div class="bar"><label>Paros en el período ≥<input id="an" type="number" value="3" min="1"></label><label>Horas en el período ≥<input id="ah" type="number" value="8" min="1"></label><label>Paro largo (× TMPR planta)<input id="af" type="number" value="2" min="1" step="0.5"></label><label style="flex-direction:row;align-items:center;gap:6px;margin-top:18px"><input id="av" type="checkbox"> Ver hasta 25</label></div>
+<div class="scroll"><table id="at"></table></div></section>
 <section class="card"><h2>Horas de parada por planta y mes</h2><p class="cap">Mapa de calor: más oscuro, más horas. La última fila suma las horas de todas las plantas en cada mes.</p><div class="scroll"><table id="hm"></table></div></section>
 <details class="card"><summary><b>¿Cómo se calculan los indicadores?</b></summary>
 <ul style="line-height:1.7"><li><b>Disponibilidad de una planta</b> = 1 − TPM ÷ TPP (horas de parada mecánica ÷ horas planificadas de producción).</li>
@@ -73,7 +81,7 @@ th.l{text-align:left}.hmc{font-variant-numeric:tabular-nums;text-align:center}
 <div class="legend" style="display:flex;gap:16px;font-size:12.5px;color:var(--mut)"><span>▮ Horas de parada (eje izquierdo)</span><span style="color:var(--ko)">● Indicador (eje derecho)</span></div></section>
 </div>
 <div id="t2" hidden><p class="card" id="t2m" hidden></p><div id="t2b">
-<div class="card" style="padding:12px 16px"><div class="cap" style="margin:0 0 8px"><b>Filtros generales</b> · costos, costo por kg, salidas de material y alertas. Las secciones de órdenes, repuestos y SOLPED tienen sus propios filtros.</div><div id="fq"></div><div class="cap" id="qc" style="margin:8px 0 0"></div></div>
+<div class="card" style="padding:12px 16px"><div class="cap" style="margin:0 0 8px"><b>Filtros generales</b> · costos, costo por kg y salidas de material. Las secciones de órdenes, repuestos y SOLPED tienen sus propios filtros.</div><div id="fq"></div><div class="cap" id="qc" style="margin:8px 0 0"></div></div>
 <section class="card"><h2>Costos de mantenimiento</h2><p class="cap" id="cc"></p><div class="kpis" id="ck"></div>
 <div class="grid2"><div><h3 class="s">Costo por mes</h3><svg id="cm" viewBox="0 0 560 280" role="img" aria-label="Costo por mes"></svg><div style="font-size:12.5px;color:var(--mut)" id="cl"></div></div><div><h3 class="s">Ubicaciones técnicas con más costo</h3><div class="scroll"><table id="cu"></table></div></div></div></section>
 <section class="card"><h2>Costo de mantenimiento por kg producido</h2><p class="cap">COP por kg de producción en el período. Centro 1000 = plantas P02 a P12 y Centro 2000 = P14, según el centro de costo de cada orden; «Otros» reúne bodegas y servicios generales, y solo suma en el total. No usa los filtros de ubicación y equipo.</p><div class="scroll"><table id="kg"></table></div></section>
@@ -85,10 +93,7 @@ th.l{text-align:left}.hmc{font-variant-numeric:tabular-nums;text-align:center}
 <section class="card"><h2>Consumo de repuestos acumulado</h2><p class="cap">Materiales consumidos contra órdenes (MB51, movimientos 261 y 262) con clasificación ABC por valor y compras pendientes (ME2N). La rotación y la cobertura necesitan además el stock (MB52 o MM60).</p><div id="fr"></div><div class="kpis" id="rk"></div><div class="scroll"><table id="rt"></table></div></section>
 <section class="card"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><h2>Salidas de materiales por usuario y fecha</h2><p class="cap">Líneas de salida y su valor en el período. «Quien retira» sale del texto del documento y «quien registra», de la referencia.</p></div><label>Agrupar por<select id="sv"><option value="p">Quien retira (técnico)</option><option value="r">Quien registra (almacén)</option></select></label></div>
 <div class="grid2"><div class="scroll"><table id="st"></table></div><div><h3 class="s">Líneas de salida por semana</h3><svg id="sc" viewBox="0 0 400 260" role="img" aria-label="Líneas de salida por semana"></svg></div></div></section>
-<section class="card"><h2>SOLPED sin pedido</h2><p class="cap" id="spc"></p><div id="fs"></div><div class="kpis" id="spk" style="margin-top:12px"></div><div class="scroll"><table id="spt"></table></div></section>
-<section class="card"><h2>Alertas de análisis de fallas</h2><p class="cap" id="ac"></p>
-<div class="bar"><label>Paros en el período ≥<input id="an" type="number" value="3" min="1"></label><label>Horas en el período ≥<input id="ah" type="number" value="8" min="1"></label><label>Paro largo (× TMPR planta)<input id="af" type="number" value="2" min="1" step="0.5"></label><label style="flex-direction:row;align-items:center;gap:6px;margin-top:18px"><input id="av" type="checkbox"> Ver hasta 25</label></div>
-<div class="scroll"><table id="at"></table></div></section></div></div>
+<section class="card"><h2>SOLPED sin pedido</h2><p class="cap" id="spc"></p><div id="fs"></div><div class="kpis" id="spk" style="margin-top:12px"></div><div class="scroll"><table id="spt"></table></div></section></div></div>
 <div id="t3" hidden>
 <section class="card"><div class="ah"><div><h2>Usuarios</h2><p class="cap">Cada usuario entra con su código de 4 dígitos. «Nuevo» genera un código al azar que no se repite.</p></div><button class="up" id="anu" type="button">+ Agregar usuario</button></div>
 <div class="scroll"><table id="au"></table></div></section>
@@ -114,6 +119,7 @@ const MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Sep
 const $=i=>document.getElementById(i),fmt=(v,d=0)=>v.toLocaleString('es-CO',{maximumFractionDigits:d});
 const S={m:-1,w:0,p:-1};
 // día: {d:'2026-01-05',w:semana,m:mes0,t:[tpp h x11],pm:[min x11],kg:[kg x11]}  evento: {d,p,o,h}
+const rango=()=>'enero a '+MN[DATA.days[DATA.days.length-1].m].toLowerCase();
 function days(){return DATA.days.filter(x=>(S.m<0||x.m===S.m)&&(!S.w||x.w===S.w))}
 function evs(ds){const set=new Set(ds.map(x=>x.d));return DATA.ev.filter(e=>set.has(e.d))}
 function stat(ds,es,sel){const A=sel.map(()=>({t:0,pm:0,kg:0,n:0}));
@@ -125,7 +131,7 @@ function cls(k,v){if(v==null)return'n';const m={tmef:[16,10],tmpr:[20,32],disp:[
 const IC={g:'✓ ',a:'! ',r:'✕ ',n:''},F={disp:v=>fmt(v*100,1)+'%',conf:v=>fmt(v*100,1)+'%',tmef:v=>fmt(v,1)+' h',tmpr:v=>fmt(v,1)+' min'};
 function render(){
  const ds=days(),es=evs(ds),all=P.map((p,i)=>i),A=stat(ds,es,all),one=S.p>=0;
- $('sub').textContent=(S.m<0?'Enero a septiembre':MN[S.m])+(S.w?' · semana '+S.w:'')+(one?' · '+P[S.p]:' · grupo (todas las plantas)');
+ $('sub').textContent=(S.m<0?'E'+rango().slice(1):MN[S.m])+(S.w?' · semana '+S.w:'')+(one?' · '+P[S.p]:' · grupo (todas las plantas)');
  const Gp=G(one?[S.p]:all,A),Sas=G(all.slice(0,10),A),NM={disp:'Disponibilidad (ponderada por kg)',conf:'Confiabilidad (sin ponderar)',tmef:'TMEF (tiempo medio entre fallas)',tmpr:'TMPR (tiempo medio de reparación)'};
  $('kpis').innerHTML=['disp','conf','tmef','tmpr'].map(k=>{const c=cls(k,Gp[k]);return`<div class="card kpi"><h3>${NM[k]}</h3><div class="v">${Gp[k]==null?'N/A':F[k](Gp[k])}<span class="tag ${c}">${{g:'Bueno',a:'Aceptable',r:'Fuera de meta',n:''}[c]}</span></div>${one||Sas[k]==null?'':`<div class="m">SAS (P02–P12, sin P14): ${F[k](Sas[k])}</div>`}</div>`}).join('')+
  `<div class="card kpi"><h3>Producción total</h3><div class="v">${fmt(Gp.kg)} kg</div><div class="m">${fmt(Gp.kg/1000,1)} t · ${fmt(Gp.pm/60,1)} h de parada · ${fmt(Gp.n)} paros${Gp.kg?' · '+fmt(Gp.pm/(Gp.kg/1000),1)+' min/t':''}</div></div>`;
@@ -134,10 +140,10 @@ function render(){
  all.forEach(i=>{const a=A[i];if(!a.t&&!a.pm)return;h+=row(P[i],kp(a),a,`data-p="${i}" class="${S.p===i?'sel':''}"`)});
  if(!one)h+=row('Total grupo',Gp,Gp,'class="tot" style="cursor:default;border-top:2px solid var(--ink)"');
  $('tbl').innerHTML=h+'</tbody>';
- document.querySelectorAll('#tbl tbody tr[data-p]').forEach(r=>r.onclick=()=>{S.p=+r.dataset.p;$('fp').value=S.p;render()});
+ document.querySelectorAll('#tbl tbody tr[data-p]').forEach(r=>r.onclick=()=>{S.p=+r.dataset.p;$('fp').value=S.p;render();abrir('th')});
  $('calc').innerHTML=one?`Para una sola planta no hay ponderación: disponibilidad = 1 − ${fmt(Gp.pm/60,1)} h de parada ÷ ${fmt(Gp.t,1)} h planificadas = ${Gp.disp==null?'N/A':F.disp(Gp.disp)}.`:
  `<b>Ahora mismo (grupo):</b> Σ(disponibilidad de cada planta × sus kg) ÷ Σ kg = ${fmt(Gp.num,0)} ÷ ${fmt(Gp.den,0)} = <b>${Gp.disp==null?'N/A':F.disp(Gp.disp)}</b>. Confiabilidad = ${Gp.tmef==null?'N/A':fmt(Gp.tmef,2)} ÷ (${Gp.tmef==null?'N/A':fmt(Gp.tmef,2)} + ${Gp.tmpr==null?'N/A':fmt(Gp.tmpr/60,3)}) = <b>${Gp.conf==null?'N/A':F.conf(Gp.conf)}</b>.`;
- objChart(es);trend();weekly();paretoPlants();annual();heat();render2();
+ objChart(es);trend();weekly();paretoPlants();alerts();annual();heat();render2();
 }
 function weekly(){
  const k=$('fi').value,one=S.p>=0,all=P.map((p,i)=>i),meta={disp:.985,conf:.98,tmef:16,tmpr:20}[k],pc=k==='disp'||k==='conf';
@@ -164,7 +170,7 @@ function annual(){
 function paretoPlants(){
  const all=P.map((p,i)=>i),ds=days(),es=evs(ds),A=stat(ds,es,all),tot=all.reduce((s,i)=>s+A[i].pm,0)||1;
  const L=all.filter(i=>A[i].pm>0).sort((a,b)=>A[b].pm-A[a].pm);let c=0;
- $('pt').textContent='Horas de parada por planta · '+(S.m<0?'enero a septiembre':MN[S.m])+(S.w?' · semana '+S.w:'');
+ $('pt').textContent='Horas de parada por planta · '+(S.m<0?rango():MN[S.m])+(S.w?' · semana '+S.w:'');
  const top=i=>{const m={};es.filter(e=>e.p===i).forEach(e=>{const o=DATA.obj[e.o]||'Sin objeto técnico';m[o]=(m[o]||0)+e.h});return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>`${x[0]} (${fmt(x[1],1)} h)`).join('<br>')||'—'};
  let h='<thead><tr><th>#</th><th>Planta</th><th>Horas de parada</th><th>% del total</th><th>% acumulado</th><th style="text-align:left">Objetos técnicos con más parada</th></tr></thead><tbody>';
  const pts=[];L.forEach((i,j)=>{c+=A[i].pm;pts.push([P[i],A[i].pm/60,c/tot]);h+=`<tr data-q="${i}"><td>${j+1}</td><td><b>${P[i]}</b></td><td>${fmt(A[i].pm/60,1)}</td><td>${fmt(A[i].pm/tot*100,1)}%</td><td>${fmt(c/tot*100,1)}%</td><td style="text-align:left;white-space:normal;font-size:13px;min-width:260px">${top(i)}</td></tr>`});
@@ -207,7 +213,7 @@ const okO=(X,i,q=Q)=>{const o=X.ord[i];return(q.inc||!o[5])&&(q.pl===-9||o[8]===
 function render2(){const X=DATA.cx;$('t2m').hidden=!!X;$('t2b').hidden=!X;if(!X){$('t2m').textContent='Estos datos no incluyen costos ni repuestos. Carga el libro con las hojas KOB1, MB51, IW38 y ME2N desde el servidor.';return}
  if(!Q.ok){$('fq').innerHTML=fbar('q');$('fo').innerHTML=fbar('o');$('fr').innerHTML=fbar('r');initK('q',render2);initK('o',()=>orders(DATA.cx));initK('r',()=>parts(DATA.cx));initS();Q.ok=1}
  $('qc').textContent='Período: '+fd(dS(Q.a))+' al '+fd(dS(Q.b))+(Q.pl!==-9?' · '+(Q.pl>=0?P[Q.pl]:'áreas comunes'):'')+(Q.u>=0?' · '+X.u[Q.u]:'')+(Q.e>=0?' · '+X.e[Q.e]:'');
- costs(X);perKg(X);orders(X);parts(X);sal(X);solped();alerts()}
+ costs(X);perKg(X);orders(X);parts(X);sal(X);solped()}
 function costs(X){const R=X.crow.filter(r=>r[1]>=Q.a&&r[1]<=Q.b&&okO(X,r[0])),T=[0,0,0,0],B={},U={};
  R.forEach(r=>{T[r[2]]+=r[3];const m=mo(r[1]);(B[m]=B[m]||[0,0,0,0])[r[2]]+=r[3];const u=X.ord[r[0]][3];U[u]=(U[u]||0)+r[3]});
  const tot=T.reduce((a,b)=>a+b,0)||1,ms=Object.keys(B).map(Number).sort((a,b)=>a-b);
@@ -245,12 +251,15 @@ function sal(X){const k=$('sv').value,ix=k==='p'?1:2,nm=k==='p'?X.ppl:X.usr,m={}
  for(let i=0;i<=4;i++){const y=t+h-h*i/4;s+=`<line x1="${l}" x2="${Wd-6}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${l-5}" y="${y+4}" text-anchor="end">${fmt(mx*i/4)}</text>`}
  for(let i=0;i<nw;i++){const v=W[i]||0,bh=h*v/mx;s+=`<rect x="${l+i*bw+bw*.12}" y="${t+h-bh}" width="${bw*.76}" height="${bh}" fill="var(--acc)"><title>Semana del ${fd(dS(Q.a+i*7))}: ${fmt(v)} líneas</title></rect>`+(nw<=14||i%Math.ceil(nw/10)===0?`<text x="${l+i*bw+bw/2}" y="${255}" text-anchor="middle">${dS(Q.a+i*7).slice(5).split('-').reverse().join('/')}</text>`:'')}
  $('sc').innerHTML=s}
-function alerts(){const X=DATA.cx,ev=DATA.ev,N=+$('an').value||3,Hh=+$('ah').value||8,F=+$('af').value||2,A=dS(Q.a),B=dS(Q.b),len=Q.b-Q.a+1,pm=P.map(()=>0),pn=P.map(()=>0);if(!ev.length)return;
- DATA.days.forEach(x=>x.pm.forEach((v,i)=>pm[i]+=v));ev.forEach(e=>pn[e.p]++);const G={};ev.filter(e=>Q.pl===-9||e.p===Q.pl).forEach(e=>(G[e.p+'|'+e.o]=G[e.p+'|'+e.o]||[]).push(e));const cost={};X.objc.forEach(a=>cost[a[0]+'|'+a[1]]=a[2]);
- const R=Object.entries(G).map(([k,a])=>{const w=a.filter(e=>e.d>=A&&e.d<=B),p=a[0].p,h=w.reduce((s,e)=>s+e.h,0),mx=Math.max(0,...w.map(e=>e.h*60)),base=Q.a>=14?a.filter(e=>e.d<A).length/(Q.a/len):0,tp=pn[p]?pm[p]/pn[p]:0,
-  f=[w.length>=N&&'Reincidencia',Q.a>=14&&w.length>=2&&w.length>2*base&&'Frecuencia en aumento',(h>=Hh||(tp&&mx>F*tp))&&'Duración'].filter(Boolean);return{p,o:a[0].o,n:w.length,h,mx,base,f,c:cost[k]||0}}).filter(r=>r.n&&r.f.length).sort((a,b)=>b.f.length-a.f.length||b.h-a.h);
- $('ac').textContent=`Período: ${fd(A)} al ${fd(B)}. ${R.length} objetos técnicos con al menos una alerta; se muestran los de mayor severidad. «Frecuencia en aumento» compara con el promedio de los períodos anteriores del mismo largo (solo si hay 14 días o más antes). «Duración»: horas sobre el umbral o un paro mayor a ${F} veces el TMPR de la planta.`;
- $('at').innerHTML='<thead><tr><th>Planta</th><th class="l">Objeto técnico</th><th>Paros</th><th>Horas</th><th>Promedio previo</th><th>Paro mayor (min)</th><th>Costo órdenes año</th><th class="l">Alertas</th></tr></thead><tbody>'+R.slice(0,$('av').checked?25:5).map(r=>`<tr><td><b>${P[r.p]}</b></td><td style="text-align:left;white-space:normal;font-size:13px">${DATA.obj[r.o]||'Sin objeto técnico'}</td><td>${r.n}</td><td>${fmt(r.h,1)}</td><td>${fmt(r.base,1)}</td><td>${fmt(r.mx)}</td><td>${r.c?mm(r.c):'—'}</td><td style="text-align:left;white-space:normal">${r.f.map(x=>`<span class="chip">${x}</span>`).join('')}</td></tr>`).join('')+'</tbody>'}
+// Alertas: usan los filtros de Indicadores (mes, semana y planta). El costo solo aparece si el rol puede ver costos.
+function alerts(){const X=DATA.cx,ev=DATA.ev,ds=days(),N=+$('an').value||3,Hh=+$('ah').value||8,F=+$('af').value||2,pm=P.map(()=>0),pn=P.map(()=>0);
+ if(!ev.length||!ds.length){$('ac').textContent='Sin datos en el período seleccionado.';$('at').innerHTML='';return}
+ const A=ds[0].d,B=ds[ds.length-1].d,qa=dN(A),len=dN(B)-qa+1;
+ DATA.days.forEach(x=>x.pm.forEach((v,i)=>pm[i]+=v));ev.forEach(e=>pn[e.p]++);const G={};ev.filter(e=>S.p<0||e.p===S.p).forEach(e=>(G[e.p+'|'+e.o]=G[e.p+'|'+e.o]||[]).push(e));const cost={};if(X)X.objc.forEach(a=>cost[a[0]+'|'+a[1]]=a[2]);
+ const R=Object.entries(G).map(([k,a])=>{const w=a.filter(e=>e.d>=A&&e.d<=B),p=a[0].p,h=w.reduce((s,e)=>s+e.h,0),mx=Math.max(0,...w.map(e=>e.h*60)),base=qa>=14?a.filter(e=>e.d<A).length/(qa/len):0,tp=pn[p]?pm[p]/pn[p]:0,
+  f=[w.length>=N&&'Reincidencia',qa>=14&&w.length>=2&&w.length>2*base&&'Frecuencia en aumento',(h>=Hh||(tp&&mx>F*tp))&&'Duración'].filter(Boolean);return{p,o:a[0].o,n:w.length,h,mx,base,f,c:cost[k]||0}}).filter(r=>r.n&&r.f.length).sort((a,b)=>b.f.length-a.f.length||b.h-a.h);
+ $('ac').textContent=`Período: ${fd(A)} al ${fd(B)}${S.p>=0?' · '+P[S.p]:''}. ${R.length} objetos técnicos con al menos una alerta; se muestran los de mayor severidad. «Frecuencia en aumento» compara con el promedio de los períodos anteriores del mismo largo (solo si hay 14 días o más antes). «Duración»: horas sobre el umbral o un paro mayor a ${F} veces el TMPR de la planta.`;
+ $('at').innerHTML='<thead><tr><th>Planta</th><th class="l">Objeto técnico</th><th>Paros</th><th>Horas</th><th>Promedio previo</th><th>Paro mayor (min)</th>'+(X?'<th>Costo órdenes año</th>':'')+'<th class="l">Alertas</th></tr></thead><tbody>'+R.slice(0,$('av').checked?25:5).map(r=>`<tr><td><b>${P[r.p]}</b></td><td style="text-align:left;white-space:normal;font-size:13px">${DATA.obj[r.o]||'Sin objeto técnico'}</td><td>${r.n}</td><td>${fmt(r.h,1)}</td><td>${fmt(r.base,1)}</td><td>${fmt(r.mx)}</td>${X?`<td>${r.c?mm(r.c):'—'}</td>`:''}<td style="text-align:left;white-space:normal">${r.f.map(x=>`<span class="chip">${x}</span>`).join('')}</td></tr>`).join('')+'</tbody>'}
 function solped(){const X=DATA.cx;if(!X.sp){$('spc').textContent='Este libro no trae la hoja ME5A; agrégala para ver las solicitudes sin pedido.';$('spk').innerHTML=$('spt').innerHTML='';return}
  const q=QS.s,ref=dN(X.spl),R=X.sp.filter(r=>r[0]>=q.a&&r[0]<=q.b&&(!q.c||r[8]===q.c)&&(!q.g||r[9]===q.g)&&(!q.s||r[10]===q.s)).map(r=>({r,age:ref-r[0]})),tot=R.reduce((s,x)=>s+x.r[7],0);
  R.sort($('sso').value==='v'?(a,b)=>b.r[7]-a.r[7]:(a,b)=>b.age-a.age);
@@ -304,7 +313,19 @@ $('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('msg').tex
   const wb=XLSX.read(await f.arrayBuffer(),{type:'array',cellDates:true});const cx0=DATA.cx;DATA=parse(wb);DATA.cx=cx0;S.m=-1;S.p=-1;S.w=0;filters();render();
   $('msg').textContent='Datos actualizados con '+f.name;$('src').textContent=''}catch(x){$('msg').textContent='Error: '+x.message}};
 $('b1').onclick=()=>tab(1);$('b2').onclick=()=>tab(2);$('b3').onclick=()=>tab(3);
-['av','sv','an','ah','af'].forEach(i=>$(i).onchange=render2);['omo','oot','ov'].forEach(i=>$(i).onchange=()=>orders(DATA.cx));
+// ---- Secciones desplegables: el título abre o cierra cada sección y el estado se recuerda en este navegador.
+// Por defecto solo queda abierta la primera sección de cada pestaña.
+const OK='tmm-abiertas',DEF=['Semáforo por planta','Costos de mantenimiento','Usuarios','Guardar cambios'];let OPEN=null;try{OPEN=JSON.parse(localStorage.getItem(OK))}catch(x){}
+const CARDS=[...document.querySelectorAll('#t1 .card,#t2 .card,#t3 .card')].filter(c=>{const h=c.querySelector('h2');return h&&h.closest('.card')===c});
+const setC=(c,o)=>{c.classList.toggle('col',!o);c.querySelector('h2').setAttribute('aria-expanded',o)},
+ saveC=()=>{try{localStorage.setItem(OK,JSON.stringify(CARDS.filter(c=>!c.classList.contains('col')).map(c=>c.dataset.k)))}catch(x){}},
+ abrir=id=>{const c=$(id).closest('.card');if(c.classList.contains('col')){setC(c,true);saveC()}};
+CARDS.forEach(c=>{const h=c.querySelector('h2');let hd=h;while(hd.parentElement!==c)hd=hd.parentElement;hd.classList.add('hd');
+ c.dataset.k=h.id||h.textContent.trim();h.classList.add('tg');h.tabIndex=0;h.setAttribute('role','button');setC(c,(Array.isArray(OPEN)?OPEN:DEF).includes(c.dataset.k));
+ const tog=()=>{setC(c,c.classList.contains('col'));saveC()};h.onclick=tog;h.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tog()}}});
+const todas=o=>{CARDS.filter(c=>!c.closest('[hidden]')).forEach(c=>setC(c,o));saveC()};
+$('xa').onclick=()=>todas(true);$('xc').onclick=()=>todas(false);
+['av','an','ah','af'].forEach(i=>$(i).onchange=alerts);$('sv').onchange=render2;['omo','oot','ov'].forEach(i=>$(i).onchange=()=>orders(DATA.cx));
 // ---- Acceso por código: cada código descifra solo las llaves de las secciones de su rol
 const SK='tmm-sesion',ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0)),normC=c=>c.replace(/\D/g,'');
 const aesD=async(raw,o)=>new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(o.iv)},await crypto.subtle.importKey('raw',ub(raw),'AES-GCM',false,['decrypt']),ub(o.ct)));
@@ -320,7 +341,7 @@ async function start(u){DATA=await gunz(await aesD(u.k.ind,ENC.ind));if(u.k.cx)D
 // ---- Módulo de administración: usuarios, códigos y permisos por rol
 // Los usuarios viajan cifrados en data.js con una llave que solo tienen los roles de administración.
 // Al guardar se vuelven a envolver las llaves de sección para cada código; los datos no se tocan.
-const REPO='mteran30/tablero-mantenimiento',SEC=[['indicadores','Indicadores'],['costos','Costos, repuestos y alertas']];
+const REPO='mteran30/tablero-mantenimiento',SEC=[['indicadores','Indicadores'],['costos','Costos y repuestos']];
 let ADM=null,ME=null,DIRTY=false;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]),
  bb=u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode(...u.subarray(i,i+8192));return btoa(s)},
@@ -344,7 +365,7 @@ function admin(){const R=Object.keys(ADM.roles),ch=(on,a)=>`<input type="checkbo
   return`<tr><td><input class="ai" ${a} data-f="rn" value="${esc(r)}" aria-label="Nombre del rol"></td>${SEC.map(s=>`<td class="c">${ch(o.secciones.includes(s[0]),a+` data-s="${s[0]}" aria-label="${s[1]}"`)}</td>`).join('')}<td class="c">${ch(o.excel,a+' data-f="excel" aria-label="Botón Excel"')}</td><td class="c">${ch(o.admin,a+' data-f="admin" aria-label="Administración"')}</td><td class="c">${n}</td><td><button class="sb del" type="button" data-dr="${esc(r)}" ${n?'disabled title="Tiene usuarios asignados"':''}>Eliminar</button></td></tr>`}).join('')+'</tbody>';
  const {E,W}=problemas();$('ags').disabled=!!E.length||!DIRTY;tokUI();
  $('ae').innerHTML=E.map(x=>`<span class="chip">✕ ${esc(x)}</span>`).join(' ')+W.map(x=>`<span class="chip" style="color:var(--wa);background:var(--wab)">! ${esc(x)}</span>`).join(' ')+(!E.length&&DIRTY?'<span class="ok">Hay cambios sin publicar.</span>':'')}
-const mark=()=>{DIRTY=true;$('am').textContent='';admin()};
+const mark=()=>{DIRTY=true;$('am').textContent='';admin();abrir('ags')};
 $('t3').addEventListener('change',e=>{const t=e.target,d=t.dataset;
  if(d.u!=null){const u=ADM.usuarios[+d.u];u[d.f]=d.f==='codigo'?t.value.replace(/\D/g,'').slice(0,4):t.value.trim();if(d.f==='nombre'&&!u.nombre)u.nombre='';}
  else if(d.r!=null){const o=ADM.roles[d.r];
