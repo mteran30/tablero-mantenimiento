@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tablero de Mantenimiento Mecánico 2026</title>
+<style>
+:root{--bg:#F5F7FB;--card:#fff;--ink:#0F172A;--mut:#64748B;--line:#E2E8F0;--acc:#4F46E5;--ok:#059669;--okb:#D1FAE5;--wa:#B45309;--wab:#FEF3C7;--ko:#E11D48;--kob:#FFE4E6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1020;--card:#151B2E;--ink:#E2E8F0;--mut:#94A3B8;--line:#27314A;--acc:#6366F1;--ok:#34D399;--okb:#063F30;--wa:#FBBF24;--wab:#3F2A06;--ko:#FB7185;--kob:#4C0A1E}}
+:root[data-theme="dark"]{--bg:#0B1020;--card:#151B2E;--ink:#E2E8F0;--mut:#94A3B8;--line:#27314A;--acc:#6366F1;--ok:#34D399;--okb:#063F30;--wa:#FBBF24;--wab:#3F2A06;--ko:#FB7185;--kob:#4C0A1E}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Segoe UI",Calibri,Arial,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:25px;margin:0}h2{font-size:16px;margin:0 0 4px}.sub,.cap,footer{color:var(--mut)}.sub{margin:2px 0 0;font-size:14px}.cap{font-size:13px;margin:0 0 10px}footer{font-size:12.5px;margin-top:16px}
+header{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+label{font-size:13px;color:var(--mut);display:flex;flex-direction:column;gap:3px}
+select,.up{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.up{cursor:pointer;background:var(--acc);color:#fff;border-color:var(--acc);font-weight:600}
+select:focus-visible,.up:focus-within{outline:2px solid var(--acc);outline-offset:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px}.kpis .card{margin:0}
+.kpi h3{margin:0;font-size:13px;color:var(--mut);font-weight:600}.kpi .v{font-size:30px;font-weight:700;margin:4px 0 2px;font-variant-numeric:tabular-nums}.kpi .m{font-size:12.5px;color:var(--mut)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:middle}
+.g{color:var(--ok);background:var(--okb)}.a{color:var(--wa);background:var(--wab)}.r{color:var(--ko);background:var(--kob)}.n{color:var(--mut)}
+.grid2{display:grid;grid-template-columns:3fr 2fr;gap:12px}@media(max-width:860px){.grid2{grid-template-columns:1fr}}.grid2 .card{margin:0}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:14px}
+th,td{padding:7px 9px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}th:first-child,td:first-child{text-align:left}th{color:var(--mut);font-weight:600;font-size:13px}
+td.g,td.a,td.r{font-weight:700}tbody tr{cursor:pointer}tbody tr:hover{background:var(--bg)}tr.sel td:first-child{box-shadow:inset 4px 0 var(--acc)}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--mut);font-size:11px;font-family:inherit}svg text.t{fill:var(--ink)}
+#msg{font-size:13px;color:var(--mut)}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}.tabs button{font:inherit;padding:8px 16px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--mut);cursor:pointer}.tabs button[aria-pressed="true"]{background:var(--acc);color:#fff;border-color:var(--acc)}
+[hidden]{display:none!important}input[type=number]{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);width:84px}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:99px;margin:1px 3px 1px 0;color:var(--ko);background:var(--kob)}h3.s{font-size:14px;margin:4px 0 6px}
+th.l{text-align:left}.hmc{font-variant-numeric:tabular-nums;text-align:center}
+.lg{min-height:100vh;display:grid;place-items:center;padding:16px}.lgc{width:100%;max-width:380px;margin:0}.lgc h1{font-size:21px}
+.lgc input{font:inherit;width:100%;padding:10px 12px;margin:14px 0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);letter-spacing:2px;text-transform:uppercase}
+.lgc button{width:100%;padding:10px}#le{color:var(--ko);font-size:13px;min-height:18px;margin:8px 0 0}
+.ah{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start}#t3 td{text-align:left;vertical-align:middle}#t3 td.c,#t3 th.c{text-align:center}#t3 tbody tr{cursor:default}#t3 tbody tr:hover{background:none}
+.ai{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);width:180px}.ac{width:70px;text-align:center;letter-spacing:3px;font-variant-numeric:tabular-nums}
+.sb{font:inherit;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}.sb:disabled{opacity:.45;cursor:not-allowed}.sb.del{color:var(--ko)}
+.up:disabled{opacity:.5;cursor:not-allowed}#ae .chip{font-weight:600}#ae .ok{color:var(--ok)}
+.who{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mut)}.who button{font:inherit;font-size:13px;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+</style></head><body>
+<div id="lg" class="lg"><form id="lf" class="card lgc"><h1>Mantenimiento mecánico 2026</h1><p class="cap" style="margin:4px 0 0">Ingresa tu código de acceso de 4 dígitos.</p>
+<input id="lc" autocomplete="off" spellcheck="false" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder="••••" style="text-align:center;font-size:22px;letter-spacing:10px" aria-label="Código de acceso"><button class="up" type="submit">Entrar</button><p id="le" role="alert"></p></form></div>
+<main id="app" hidden>
+<header><div><h1>Mantenimiento mecánico 2026</h1><p class="sub" id="sub"></p></div><div class="who"><span id="wn"></span><button id="lo" type="button">Salir</button></div></header>
+<div class="bar" id="fb">
+<label>Mes<select id="fm"></select></label><label>Semana<select id="fw"></select></label><label>Planta<select id="fp"></select></label>
+<label class="up" id="xl" hidden style="flex-direction:row;align-items:center;margin-left:auto;color:#fff">Actualizar con nuevo Excel<input id="file" type="file" accept=".xlsx,.xlsm" hidden></label>
+<span id="msg"></span></div>
+<div class="tabs"><button id="b1" aria-pressed="true">Indicadores</button><button id="b2" aria-pressed="false">Costos, repuestos y alertas</button><button id="b3" aria-pressed="false" hidden>Administración</button></div>
+<div id="t1">
+<section class="kpis" id="kpis"></section>
+<section class="card"><h2>Semáforo por planta</h2><p class="cap">Haz clic en una planta para ver sus objetos técnicos. Metas «Bueno»: TMEF ≥16 h, TMPR ≤20 min, disponibilidad ≥98,5%, confiabilidad ≥98%.</p>
+<div class="scroll"><table id="tbl"></table></div></section>
+<section class="card"><h2 id="ay"></h2><p class="cap">No cambia con los filtros: resume todo el año hasta la última fecha con datos.</p><div id="ann"></div></section>
+<section class="card"><h2 id="pt"></h2><p class="cap">Ordenado de mayor a menor. El % es sobre las horas de parada del período seleccionado; los objetos técnicos y sus horas salen de los avisos IW28 (Parada = X). Haz clic en una planta para detallarla.</p>
+<div class="scroll"><table id="ptb"></table></div>
+<h2 style="margin-top:16px">Pareto de paradas por planta</h2><p class="cap">Barras: horas de parada. Curva: % acumulado. Línea punteada: 80%.</p><svg id="pc" viewBox="0 0 640 300" role="img" aria-label="Pareto de paradas por planta"></svg></section>
+<section class="card"><h2>Horas de parada por planta y mes</h2><p class="cap">Mapa de calor: más oscuro, más horas. La última fila suma las horas de todas las plantas en cada mes.</p><div class="scroll"><table id="hm"></table></div></section>
+<details class="card"><summary><b>¿Cómo se calculan los indicadores?</b></summary>
+<ul style="line-height:1.7"><li><b>Disponibilidad de una planta</b> = 1 − TPM ÷ TPP (horas de parada mecánica ÷ horas planificadas de producción).</li>
+<li><b>Disponibilidad del grupo</b> = Σ(disponibilidad de cada planta × kg de esa planta) ÷ Σ kg de todas las plantas. Una planta que produce más pesa más; una sin producción no pesa.</li>
+<li><b>TMEF</b> = (TPP − TPM) ÷ número de paros. <b>TMPR</b> = minutos de parada ÷ número de paros (solo avisos IW28 con Parada = X).</li>
+<li><b>Confiabilidad</b> = TMEF ÷ (TMEF + TMPR en horas). Sin ponderar por kg: se calcula con el TMEF y el TMPR del conjunto de plantas.</li>
+<li><b>SAS</b> agrupa P02 a P12; <b>Grupo</b> agrega también P14, como en tu hoja «Calculo Indicad. PM».</li></ul>
+<p id="calc" class="cap" style="font-size:14px;color:var(--ink)"></p></details>
+<section class="grid2"><div class="card"><h2 id="th"></h2><p class="cap">Horas de parada por objeto técnico (avisos IW28 marcados como parada). Porcentaje acumulado a la derecha.</p><svg id="obj" role="img" aria-label="Paradas por objeto técnico"></svg></div>
+<div class="card"><h2 id="tt"></h2><p class="cap" id="tc"></p><svg id="trend" viewBox="0 0 400 300" role="img" aria-label="Tendencia de paradas"></svg></div></section>
+<section class="card"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start"><div><h2 id="wt"></h2><p class="cap">Barras: horas de parada mecánica de cada semana. Curva: indicador elegido. Línea punteada: meta «Bueno».</p></div>
+<label>Indicador<select id="fi"><option value="disp">Disponibilidad</option><option value="conf">Confiabilidad</option><option value="tmef">TMEF (h)</option><option value="tmpr">TMPR (min)</option></select></label></div>
+<svg id="wk" viewBox="0 0 900 330" role="img" aria-label="Evolución semanal del indicador y horas de parada"></svg>
+<div class="legend" style="display:flex;gap:16px;font-size:12.5px;color:var(--mut)"><span>▮ Horas de parada (eje izquierdo)</span><span style="color:var(--ko)">● Indicador (eje derecho)</span></div></section>
+</div>
+<div id="t2" hidden><p class="card" id="t2m" hidden></p><div id="t2b">
+<div class="card" style="padding:12px 16px"><div class="cap" style="margin:0 0 8px"><b>Filtros generales</b> · costos, costo por kg, salidas de material y alertas. Las secciones de órdenes, repuestos y SOLPED tienen sus propios filtros.</div><div id="fq"></div><div class="cap" id="qc" style="margin:8px 0 0"></div></div>
+<section class="card"><h2>Costos de mantenimiento</h2><p class="cap" id="cc"></p><div class="kpis" id="ck"></div>
+<div class="grid2"><div><h3 class="s">Costo por mes</h3><svg id="cm" viewBox="0 0 560 280" role="img" aria-label="Costo por mes"></svg><div style="font-size:12.5px;color:var(--mut)" id="cl"></div></div><div><h3 class="s">Ubicaciones técnicas con más costo</h3><div class="scroll"><table id="cu"></table></div></div></div></section>
+<section class="card"><h2>Costo de mantenimiento por kg producido</h2><p class="cap">COP por kg de producción en el período. Centro 1000 = plantas P02 a P12 y Centro 2000 = P14, según el centro de costo de cada orden; «Otros» reúne bodegas y servicios generales, y solo suma en el total. No usa los filtros de ubicación y equipo.</p><div class="scroll"><table id="kg"></table></div></section>
+<section class="card"><h2>Costos de órdenes de mantenimiento</h2><p class="cap" id="oc"></p><div id="fo"></div>
+<div class="bar" style="margin-top:10px"><label style="flex-direction:row;align-items:center;gap:6px"><input id="omo" type="checkbox" checked> Mano de obra (notificaciones de horas)</label><label style="flex-direction:row;align-items:center;gap:6px"><input id="oot" type="checkbox" checked> Otros (materiales, servicios y proyectos)</label><label style="flex-direction:row;align-items:center;gap:6px"><input id="ov" type="checkbox"> Ver hasta 50</label></div>
+<div class="kpis" id="ok"></div>
+<div id="oh"><h3 class="s">Mano de obra · notificaciones de horas</h3><div class="scroll"><table id="ot1"></table></div></div>
+<div id="oo" style="margin-top:16px"><h3 class="s">Otras órdenes · materiales, servicios y proyectos</h3><div class="scroll"><table id="ot2"></table></div></div></section>
+<section class="card"><h2>Consumo de repuestos acumulado</h2><p class="cap">Materiales consumidos contra órdenes (MB51, movimientos 261 y 262) con clasificación ABC por valor y compras pendientes (ME2N). La rotación y la cobertura necesitan además el stock (MB52 o MM60).</p><div id="fr"></div><div class="kpis" id="rk"></div><div class="scroll"><table id="rt"></table></div></section>
+<section class="card"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><h2>Salidas de materiales por usuario y fecha</h2><p class="cap">Líneas de salida y su valor en el período. «Quien retira» sale del texto del documento y «quien registra», de la referencia.</p></div><label>Agrupar por<select id="sv"><option value="p">Quien retira (técnico)</option><option value="r">Quien registra (almacén)</option></select></label></div>
+<div class="grid2"><div class="scroll"><table id="st"></table></div><div><h3 class="s">Líneas de salida por semana</h3><svg id="sc" viewBox="0 0 400 260" role="img" aria-label="Líneas de salida por semana"></svg></div></div></section>
+<section class="card"><h2>SOLPED sin pedido</h2><p class="cap" id="spc"></p><div id="fs"></div><div class="kpis" id="spk" style="margin-top:12px"></div><div class="scroll"><table id="spt"></table></div></section>
+<section class="card"><h2>Alertas de análisis de fallas</h2><p class="cap" id="ac"></p>
+<div class="bar"><label>Paros en el período ≥<input id="an" type="number" value="3" min="1"></label><label>Horas en el período ≥<input id="ah" type="number" value="8" min="1"></label><label>Paro largo (× TMPR planta)<input id="af" type="number" value="2" min="1" step="0.5"></label><label style="flex-direction:row;align-items:center;gap:6px;margin-top:18px"><input id="av" type="checkbox"> Ver hasta 25</label></div>
+<div class="scroll"><table id="at"></table></div></section></div></div>
+<div id="t3" hidden>
+<section class="card"><div class="ah"><div><h2>Usuarios</h2><p class="cap">Cada usuario entra con su código de 4 dígitos. «Nuevo» genera un código al azar que no se repite.</p></div><button class="up" id="anu" type="button">+ Agregar usuario</button></div>
+<div class="scroll"><table id="au"></table></div></section>
+<section class="card"><div class="ah"><div><h2>Roles y permisos</h2><p class="cap">Marca qué puede ver y hacer cada rol. «Administración» da acceso a esta pestaña y a los costos.</p></div><button class="up" id="anr" type="button">+ Agregar rol</button></div>
+<div class="scroll"><table id="ar"></table></div></section>
+<section class="card"><h2>Guardar cambios</h2><p class="cap">Guarda y publica los usuarios y permisos en el tablero. El link se actualiza en uno o dos minutos; hasta entonces siguen funcionando los códigos anteriores.</p>
+<div id="ae" class="cap" role="status"></div>
+<div class="bar" style="margin:10px 0 0;align-items:flex-end"><button class="up" id="ags" type="button">Guardar cambios</button>
+<span id="atw" hidden><label>Token de GitHub<input id="atk" type="password" autocomplete="off" style="font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);width:260px"></label>
+<label style="flex-direction:row;align-items:center;gap:6px;margin-top:6px"><input id="atr" type="checkbox" checked> Recordar en este equipo</label></span>
+<button class="sb" id="atc" type="button" hidden>Cambiar token</button><button class="sb" id="agd" type="button" hidden>Descargar copia de data.js</button></div>
+<p class="cap" id="am" style="margin:10px 0 0"></p></section>
+</div>
+<footer>Fuente: hojas «Datos Entrada OEE» (paradas, tiempo planificado, kg) e IW28 (objeto técnico). <span id="src"></span></footer>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<!-- Datos cifrados por rol: se generan con privado/publicar.js -->
+<script src="data.js"></script>
+<script>
+let DATA=null;
+const P=['P02','P04','P05','P06','P07','P08','P09','P10','P11','P12','P14'],PN=[2,4,5,6,7,8,9,10,11,12,14];
+const MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const $=i=>document.getElementById(i),fmt=(v,d=0)=>v.toLocaleString('es-CO',{maximumFractionDigits:d});
+const S={m:-1,w:0,p:-1};
+// día: {d:'2026-01-05',w:semana,m:mes0,t:[tpp h x11],pm:[min x11],kg:[kg x11]}  evento: {d,p,o,h}
+function days(){return DATA.days.filter(x=>(S.m<0||x.m===S.m)&&(!S.w||x.w===S.w))}
+function evs(ds){const set=new Set(ds.map(x=>x.d));return DATA.ev.filter(e=>set.has(e.d))}
+function stat(ds,es,sel){const A=sel.map(()=>({t:0,pm:0,kg:0,n:0}));
+ ds.forEach(x=>sel.forEach((i,j)=>{A[j].t+=x.t[i];A[j].pm+=x.pm[i];A[j].kg+=x.kg[i]}));
+ es.forEach(e=>{const j=sel.indexOf(e.p);if(j>=0)A[j].n++});return A}
+function kp(a){const ok=a.t>0,tmef=ok&&a.n?(a.t-a.pm/60)/a.n:null,tmpr=a.n?a.pm/a.n:null;return{disp:ok?1-a.pm/(a.t*60):null,tmef,tmpr,conf:tmef!=null&&tmpr!=null?tmef/(tmef+tmpr/60):null}}
+function G(ix,A){const o={t:0,pm:0,kg:0,n:0,num:0,den:0};ix.forEach(i=>{const a=A[i];o.t+=a.t;o.pm+=a.pm;o.kg+=a.kg;o.n+=a.n;const k=kp(a);if(k.disp!=null&&a.kg>0){o.num+=k.disp*a.kg;o.den+=a.kg}});const k=kp(o);return{...k,disp:o.den?o.num/o.den:k.disp,t:o.t,kg:o.kg,pm:o.pm,n:o.n,num:o.num,den:o.den}}
+function cls(k,v){if(v==null)return'n';const m={tmef:[16,10],tmpr:[20,32],disp:[.985,.97],conf:[.98,.95]}[k];if(k==='tmpr')return v<=m[0]?'g':v<=m[1]?'a':'r';return v>=m[0]?'g':v>=m[1]?'a':'r'}
+const IC={g:'✓ ',a:'! ',r:'✕ ',n:''},F={disp:v=>fmt(v*100,1)+'%',conf:v=>fmt(v*100,1)+'%',tmef:v=>fmt(v,1)+' h',tmpr:v=>fmt(v,1)+' min'};
+function render(){
+ const ds=days(),es=evs(ds),all=P.map((p,i)=>i),A=stat(ds,es,all),one=S.p>=0;
+ $('sub').textContent=(S.m<0?'Enero a septiembre':MN[S.m])+(S.w?' · semana '+S.w:'')+(one?' · '+P[S.p]:' · grupo (todas las plantas)');
+ const Gp=G(one?[S.p]:all,A),Sas=G(all.slice(0,10),A),NM={disp:'Disponibilidad (ponderada por kg)',conf:'Confiabilidad (sin ponderar)',tmef:'TMEF (tiempo medio entre fallas)',tmpr:'TMPR (tiempo medio de reparación)'};
+ $('kpis').innerHTML=['disp','conf','tmef','tmpr'].map(k=>{const c=cls(k,Gp[k]);return`<div class="card kpi"><h3>${NM[k]}</h3><div class="v">${Gp[k]==null?'N/A':F[k](Gp[k])}<span class="tag ${c}">${{g:'Bueno',a:'Aceptable',r:'Fuera de meta',n:''}[c]}</span></div>${one||Sas[k]==null?'':`<div class="m">SAS (P02–P12, sin P14): ${F[k](Sas[k])}</div>`}</div>`}).join('')+
+ `<div class="card kpi"><h3>Producción total</h3><div class="v">${fmt(Gp.kg)} kg</div><div class="m">${fmt(Gp.kg/1000,1)} t · ${fmt(Gp.pm/60,1)} h de parada · ${fmt(Gp.n)} paros${Gp.kg?' · '+fmt(Gp.pm/(Gp.kg/1000),1)+' min/t':''}</div></div>`;
+ const row=(lbl,k,a,att)=>{const c=x=>`<td class="${cls(x,k[x])}">${k[x]==null?'N/A':IC[cls(x,k[x])]+F[x](k[x])}</td>`;return`<tr ${att}><td><b>${lbl}</b></td>${c('disp')}${c('conf')}${c('tmef')}${c('tmpr')}<td>${fmt(a.n)}</td><td>${fmt(a.pm/60,1)}</td><td>${fmt(a.kg)}</td></tr>`};
+ let h='<thead><tr><th>Planta</th><th>Disponibilidad</th><th>Confiabilidad</th><th>TMEF</th><th>TMPR</th><th>Paros</th><th>Parada (h)</th><th>Producción (kg)</th></tr></thead><tbody>';
+ all.forEach(i=>{const a=A[i];if(!a.t&&!a.pm)return;h+=row(P[i],kp(a),a,`data-p="${i}" class="${S.p===i?'sel':''}"`)});
+ if(!one)h+=row('Total grupo',Gp,Gp,'class="tot" style="cursor:default;border-top:2px solid var(--ink)"');
+ $('tbl').innerHTML=h+'</tbody>';
+ document.querySelectorAll('#tbl tbody tr[data-p]').forEach(r=>r.onclick=()=>{S.p=+r.dataset.p;$('fp').value=S.p;render()});
+ $('calc').innerHTML=one?`Para una sola planta no hay ponderación: disponibilidad = 1 − ${fmt(Gp.pm/60,1)} h de parada ÷ ${fmt(Gp.t,1)} h planificadas = ${Gp.disp==null?'N/A':F.disp(Gp.disp)}.`:
+ `<b>Ahora mismo (grupo):</b> Σ(disponibilidad de cada planta × sus kg) ÷ Σ kg = ${fmt(Gp.num,0)} ÷ ${fmt(Gp.den,0)} = <b>${Gp.disp==null?'N/A':F.disp(Gp.disp)}</b>. Confiabilidad = ${Gp.tmef==null?'N/A':fmt(Gp.tmef,2)} ÷ (${Gp.tmef==null?'N/A':fmt(Gp.tmef,2)} + ${Gp.tmpr==null?'N/A':fmt(Gp.tmpr/60,3)}) = <b>${Gp.conf==null?'N/A':F.conf(Gp.conf)}</b>.`;
+ objChart(es);trend();weekly();paretoPlants();annual();heat();render2();
+}
+function weekly(){
+ const k=$('fi').value,one=S.p>=0,all=P.map((p,i)=>i),meta={disp:.985,conf:.98,tmef:16,tmpr:20}[k],pc=k==='disp'||k==='conf';
+ const ws=[...new Set(DATA.days.filter(x=>(S.m<0||x.m===S.m)&&x.pm.some(v=>v>0)).map(x=>x.w))];
+ const R=ws.map(w=>{const ds=DATA.days.filter(x=>x.w===w&&(S.m<0||x.m===S.m)),g=G(one?[S.p]:all,stat(ds,evs(ds),all));return{w,h:g.pm/60,v:g[k]}});
+ $('wt').textContent='Evolución semanal · '+(one?P[one?S.p:0]:'grupo')+(S.m>=0?' · '+MN[S.m]:' · 2026');
+ const W=900,H=330,l=52,r=56,t=16,b=30,w=W-l-r,h=H-t-b,bw=w/Math.max(R.length,1),hm=Math.max(...R.map(x=>x.h),1)*1.1,vs=R.map(x=>x.v).filter(v=>v!=null);
+ const lo=pc?Math.max(0,Math.min(...vs,meta)-.02):0,hi=pc?1:Math.max(...vs,meta)*1.1,fy=v=>t+h-h*(v-lo)/((hi-lo)||1),fv=v=>pc?fmt(v*100,1)+'%':fmt(v,1);let s='';
+ for(let i=0;i<=4;i++){const y=t+h-h*i/4;s+=`<line x1="${l}" x2="${W-r}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${l-6}" y="${y+4}" text-anchor="end">${fmt(hm*i/4)} h</text><text x="${W-r+6}" y="${y+4}">${fv(lo+(hi-lo)*i/4)}</text>`}
+ R.forEach((x,i)=>{const bx=l+i*bw+bw*.18,bh=h*x.h/hm;s+=`<rect x="${bx}" y="${t+h-bh}" width="${bw*.64}" height="${bh}" rx="2" fill="var(--acc)" opacity=".55"><title>Semana ${x.w}: ${fmt(x.h,1)} h de parada</title></rect>`+(R.length<=20||i%2===0?`<text x="${bx+bw*.32}" y="${H-10}" text-anchor="middle">S${x.w}</text>`:'')});
+ s+=`<line x1="${l}" x2="${W-r}" y1="${fy(meta)}" y2="${fy(meta)}" stroke="var(--ok)" stroke-dasharray="6 4" stroke-width="1.5"/><text x="${W-r-4}" y="${fy(meta)-4}" text-anchor="end" style="fill:var(--ok)">Meta ${fv(meta)}</text>`;
+ let seg=[],segs=[seg];R.forEach((x,i)=>{if(x.v==null){seg=[];segs.push(seg)}else seg.push([l+i*bw+bw/2,fy(Math.min(Math.max(x.v,lo),hi)),x])});
+ segs.forEach(q=>{if(q.length>1)s+=`<polyline points="${q.map(p=>p[0]+','+p[1]).join(' ')}" fill="none" stroke="var(--ko)" stroke-width="2.5"/>`;q.forEach(p=>{s+=`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="var(--ko)"><title>Semana ${p[2].w}: ${fv(p[2].v)}</title></circle>`+(R.length<=16?`<text class="t" x="${p[0]}" y="${p[1]-9}" text-anchor="middle" style="font-size:10px">${fv(p[2].v)}</text>`:'')})});
+ $('wk').innerHTML=s}
+const H8=['Planta','Disponibilidad','Confiabilidad','TMEF','TMPR','Paros','Parada (h)','Producción (kg)'];
+function rowH(lbl,k,a,att){const c=x=>`<td class="${cls(x,k[x])}">${k[x]==null?'N/A':IC[cls(x,k[x])]+F[x](k[x])}</td>`;return`<tr ${att||''}><td><b>${lbl}</b></td>${c('disp')}${c('conf')}${c('tmef')}${c('tmpr')}<td>${fmt(a.n)}</td><td>${fmt(a.pm/60,1)}</td><td>${fmt(a.kg)}</td></tr>`}
+function annual(){
+ const all=P.map((p,i)=>i),A=stat(DATA.days,DATA.ev,all),Gt=G(all,A),Sa=G(all.slice(0,10),A),last=DATA.days[DATA.days.length-1].d.split('-').reverse().join('/');
+ $('ay').textContent='Acumulado anual 2026 · del 1 de enero al '+last;
+ const NM={disp:'Disponibilidad (ponderada por kg)',conf:'Confiabilidad',tmef:'TMEF',tmpr:'TMPR'};
+ let h='<div class="kpis">'+['disp','conf','tmef','tmpr'].map(k=>{const c=cls(k,Gt[k]);return`<div class="card kpi"><h3>${NM[k]}</h3><div class="v">${Gt[k]==null?'N/A':F[k](Gt[k])}<span class="tag ${c}">${{g:'Bueno',a:'Aceptable',r:'Fuera de meta',n:''}[c]}</span></div><div class="m">SAS (sin P14): ${Sa[k]==null?'N/A':F[k](Sa[k])}</div></div>`}).join('')+`<div class="card kpi"><h3>Producción acumulada</h3><div class="v">${fmt(Gt.kg)} kg</div><div class="m">${fmt(Gt.pm/60,1)} h de parada · ${fmt(Gt.n)} paros</div></div></div>`;
+ h+='<div class="scroll"><table><thead><tr>'+H8.map(x=>`<th>${x}</th>`).join('')+'</tr></thead><tbody>'+all.filter(i=>A[i].t||A[i].pm).map(i=>rowH(P[i],kp(A[i]),A[i])).join('')+rowH('Total grupo',Gt,Gt,'style="border-top:2px solid var(--ink)"')+'</tbody></table></div>';
+ $('ann').innerHTML=h}
+function paretoPlants(){
+ const all=P.map((p,i)=>i),ds=days(),es=evs(ds),A=stat(ds,es,all),tot=all.reduce((s,i)=>s+A[i].pm,0)||1;
+ const L=all.filter(i=>A[i].pm>0).sort((a,b)=>A[b].pm-A[a].pm);let c=0;
+ $('pt').textContent='Horas de parada por planta · '+(S.m<0?'enero a septiembre':MN[S.m])+(S.w?' · semana '+S.w:'');
+ const top=i=>{const m={};es.filter(e=>e.p===i).forEach(e=>{const o=DATA.obj[e.o]||'Sin objeto técnico';m[o]=(m[o]||0)+e.h});return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>`${x[0]} (${fmt(x[1],1)} h)`).join('<br>')||'—'};
+ let h='<thead><tr><th>#</th><th>Planta</th><th>Horas de parada</th><th>% del total</th><th>% acumulado</th><th style="text-align:left">Objetos técnicos con más parada</th></tr></thead><tbody>';
+ const pts=[];L.forEach((i,j)=>{c+=A[i].pm;pts.push([P[i],A[i].pm/60,c/tot]);h+=`<tr data-q="${i}"><td>${j+1}</td><td><b>${P[i]}</b></td><td>${fmt(A[i].pm/60,1)}</td><td>${fmt(A[i].pm/tot*100,1)}%</td><td>${fmt(c/tot*100,1)}%</td><td style="text-align:left;white-space:normal;font-size:13px;min-width:260px">${top(i)}</td></tr>`});
+ $('ptb').innerHTML=h+`<tr style="border-top:2px solid var(--ink)"><td></td><td><b>Total</b></td><td><b>${fmt(tot/60,1)}</b></td><td>100%</td><td></td><td></td></tr></tbody>`;
+ document.querySelectorAll('#ptb tr[data-q]').forEach(r=>r.onclick=()=>{S.p=+r.dataset.q;$('fp').value=S.p;render()});
+ const W=640,H=300,l=48,r=44,t=14,b=30,w=W-l-r,h2=H-t-b,mx=Math.max(...pts.map(p=>p[1]),1)*1.1,bw=w/Math.max(pts.length,1);let s='';
+ for(let i=0;i<=4;i++){const y=t+h2-h2*i/4;s+=`<line x1="${l}" x2="${W-r}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${l-5}" y="${y+4}" text-anchor="end">${fmt(mx*i/4)} h</text><text x="${W-r+5}" y="${y+4}">${i*25}%</text>`}
+ s+=`<line x1="${l}" x2="${W-r}" y1="${t+h2*.2}" y2="${t+h2*.2}" stroke="var(--ok)" stroke-dasharray="5 4"/>`;
+ pts.forEach((p,i)=>{const x=l+i*bw+bw*.15,bh=h2*p[1]/mx;s+=`<rect x="${x}" y="${t+h2-bh}" width="${bw*.7}" height="${bh}" rx="3" fill="var(--acc)"><title>${p[0]}: ${fmt(p[1],1)} h</title></rect><text x="${x+bw*.35}" y="${H-10}" text-anchor="middle">${p[0]}</text><text class="t" x="${x+bw*.35}" y="${t+h2-bh-4}" text-anchor="middle" style="font-size:10px">${fmt(p[1])}</text>`});
+ const q=pts.map((p,i)=>[l+i*bw+bw/2,t+h2-h2*p[2],p[2]]);
+ s+=`<polyline points="${q.map(a=>a[0]+','+a[1]).join(' ')}" fill="none" stroke="var(--ko)" stroke-width="2.5"/>`+q.map(a=>`<circle cx="${a[0]}" cy="${a[1]}" r="4" fill="var(--ko)"/><text x="${a[0]}" y="${a[1]-8}" text-anchor="middle" style="font-size:10px;fill:var(--ko)">${fmt(a[2]*100)}%</text>`).join('');
+ $('pc').innerHTML=s}
+const GN=['Mano de obra','Materiales','Servicios','Otros'],GC=['#4F46E5','#F59E0B','#06B6D4','#94A3B8'],mm=v=>fmt(v/1e6,1)+' M',mkQ=()=>({a:0,b:0,u:-1,e:-1,pl:-9,inc:0}),QS={q:mkQ(),o:mkQ(),r:mkQ(),s:{a:0,b:0,c:'',g:'',s:''}},Q=QS.q;
+const dS=n=>new Date(Date.UTC(2026,0,1+n)).toISOString().slice(0,10),dN=s=>Math.round((Date.parse(s+'T00:00:00Z')-Date.UTC(2026,0,1))/864e5),fd=s=>s.split('-').reverse().join('/'),mo=n=>+dS(n).slice(5,7)-1;
+function heat(){const ms=[...new Set(DATA.days.map(x=>x.m))].sort((a,b)=>a-b),H=P.map(()=>ms.map(()=>0));DATA.days.forEach(x=>x.pm.forEach((v,i)=>H[i][ms.indexOf(x.m)]+=v/60));
+ const mx=Math.max(...H.flat(),1),col=H.map(r=>r.reduce((a,b)=>a+b,0)),tm=ms.map((_,j)=>H.reduce((s,r)=>s+r[j],0));
+ $('hm').innerHTML='<thead><tr><th>Planta</th>'+ms.map(m=>`<th class="hmc">${MN[m].slice(0,3)}</th>`).join('')+'<th>Total</th></tr></thead><tbody>'+P.map((p,i)=>col[i]?`<tr><td><b>${p}</b></td>${H[i].map(v=>{const a=Math.sqrt(v/mx)*.9;return`<td class="hmc" style="background:rgba(225,29,72,${a.toFixed(2)});color:${a>.5?'#fff':'inherit'}">${v?fmt(v):'–'}</td>`}).join('')}<td><b>${fmt(col[i])}</b></td></tr>`:'').join('')+`<tr style="border-top:2px solid var(--ink)"><td><b>Total mes (h)</b></td>${tm.map(v=>`<td class="hmc"><b>${fmt(v)}</b></td>`).join('')}<td><b>${fmt(tm.reduce((a,b)=>a+b,0))}</b></td></tr></tbody>`}
+function tab(n){[1,2,3].forEach(i=>{$('t'+i).hidden=n!==i;$('b'+i).setAttribute('aria-pressed',n===i)});$('fb').hidden=n===3}
+const Lk=k=>dN(k==='s'?DATA.cx.spl:DATA.cx.last);
+function setPk(k,a,b){const q=QS[k];q.a=a;q.b=b;$(k+'1').value=dS(a);$(k+'2').value=dS(b)}
+function presetK(k,v){const L=Lk(k);if(v==='y')setPk(k,0,L);else if(v==='30'||v==='90')setPk(k,Math.max(0,L-v+1),L);else if(v[0]==='m'){const m=+v.slice(1);setPk(k,dN(`2026-${String(m+1).padStart(2,'0')}-01`),Math.min(L,dN(new Date(Date.UTC(2026,m+1,1)).toISOString().slice(0,10))-1))}}
+const presets=k=>'<option value="y">Todo el año</option><option value="30">Últimos 30 días</option><option value="90">Últimos 90 días</option>'+Array.from({length:mo(Lk(k))+1},(_,m)=>`<option value="m${m}">${MN[m]}</option>`).join('')+'<option value="r">Rango de fechas</option>',
+ dateF=k=>`<label>Período<select id="${k}p"></select></label><label>Desde<input id="${k}1" type="date" style="width:150px"></label><label>Hasta<input id="${k}2" type="date" style="width:150px"></label>`,bar=h=>`<div class="bar" style="margin:0">${h}</div>`,
+ chk=(id,t)=>`<label style="flex-direction:row;align-items:center;gap:6px;margin-top:18px"><input id="${id}" type="checkbox"> ${t}</label>`;
+const fbar=k=>bar(dateF(k)+`<label>Planta<select id="${k}pl"></select></label><label>Ubicación técnica<select id="${k}u" style="max-width:250px"></select></label><label>Objeto técnico<select id="${k}e" style="max-width:250px"></select></label>`+chk(k+'i','Incluir proyectos'));
+function eqsK(k){const X=DATA.cx,q=QS[k],s=new Set();X.ord.forEach(o=>{if((q.u<0||o[3]===q.u)&&o[4]>=0)s.add(o[4])});$(k+'e').innerHTML='<option value="-1">Todos los objetos técnicos</option>'+[...s].map(i=>[X.e[i],i]).sort((a,b)=>a[0].localeCompare(b[0])).map(x=>`<option value="${x[1]}">${x[0]}</option>`).join('');q.e=-1}
+function initK(k,cb){const X=DATA.cx,q=QS[k];Object.assign(q,mkQ());$(k+'p').innerHTML=presets(k);
+ $(k+'pl').innerHTML='<option value="-9">Todas las plantas</option>'+P.map((p,i)=>`<option value="${i}">${p}</option>`).join('')+'<option value="-1">Áreas comunes (sin planta)</option>';
+ $(k+'u').innerHTML='<option value="-1">Todas las ubicaciones</option>'+X.u.map((u,i)=>[u,i]).sort((a,b)=>a[0].localeCompare(b[0])).map(x=>`<option value="${x[1]}">${x[0]}</option>`).join('');eqsK(k);setPk(k,0,Lk(k));
+ $(k+'p').onchange=e=>{if(e.target.value!=='r')presetK(k,e.target.value);cb()};
+ [k+'1',k+'2'].forEach(i=>$(i).onchange=()=>{q.a=Math.max(0,dN($(k+'1').value));q.b=dN($(k+'2').value);$(k+'p').value='r';cb()});
+ $(k+'pl').onchange=e=>{q.pl=+e.target.value;cb()};$(k+'u').onchange=e=>{q.u=+e.target.value;eqsK(k);cb()};$(k+'e').onchange=e=>{q.e=+e.target.value;cb()};$(k+'i').onchange=e=>{q.inc=+e.target.checked;cb()}}
+function initS(){const X=DATA.cx,q=QS.s,S0=X.sp||[],opt=(i,t)=>`<option value="">${t}</option>`+[...new Set(S0.map(r=>r[i]))].sort().map(x=>`<option>${x}</option>`).join('');
+ $('fs').innerHTML=bar(dateF('s')+`<label>Centro<select id="ssc">${opt(8,'Todos')}</select></label><label>Grupo de compras<select id="ssg">${opt(9,'Todos')}</select></label><label>Solicitante<select id="sss">${opt(10,'Todos')}</select></label><label>Ordenar por<select id="sso"><option value="a">Más antiguas</option><option value="v">Mayor valor</option></select></label>`+chk('ssv','Ver hasta 50'));
+ Object.assign(q,{c:'',g:'',s:''});$('sp').innerHTML=presets('s');setPk('s',0,Lk('s'));
+ $('sp').onchange=e=>{if(e.target.value!=='r')presetK('s',e.target.value);solped()};
+ ['s1','s2'].forEach(i=>$(i).onchange=()=>{q.a=Math.max(0,dN($('s1').value));q.b=dN($('s2').value);$('sp').value='r';solped()});
+ $('ssc').onchange=e=>{q.c=e.target.value;solped()};$('ssg').onchange=e=>{q.g=e.target.value;solped()};$('sss').onchange=e=>{q.s=e.target.value;solped()};['sso','ssv'].forEach(i=>$(i).onchange=solped)}
+const okO=(X,i,q=Q)=>{const o=X.ord[i];return(q.inc||!o[5])&&(q.pl===-9||o[8]===q.pl)&&(q.u<0||o[3]===q.u)&&(q.e<0||o[4]===q.e)};
+function render2(){const X=DATA.cx;$('t2m').hidden=!!X;$('t2b').hidden=!X;if(!X){$('t2m').textContent='Estos datos no incluyen costos ni repuestos. Carga el libro con las hojas KOB1, MB51, IW38 y ME2N desde el servidor.';return}
+ if(!Q.ok){$('fq').innerHTML=fbar('q');$('fo').innerHTML=fbar('o');$('fr').innerHTML=fbar('r');initK('q',render2);initK('o',()=>orders(DATA.cx));initK('r',()=>parts(DATA.cx));initS();Q.ok=1}
+ $('qc').textContent='Período: '+fd(dS(Q.a))+' al '+fd(dS(Q.b))+(Q.pl!==-9?' · '+(Q.pl>=0?P[Q.pl]:'áreas comunes'):'')+(Q.u>=0?' · '+X.u[Q.u]:'')+(Q.e>=0?' · '+X.e[Q.e]:'');
+ costs(X);perKg(X);orders(X);parts(X);sal(X);solped();alerts()}
+function costs(X){const R=X.crow.filter(r=>r[1]>=Q.a&&r[1]<=Q.b&&okO(X,r[0])),T=[0,0,0,0],B={},U={};
+ R.forEach(r=>{T[r[2]]+=r[3];const m=mo(r[1]);(B[m]=B[m]||[0,0,0,0])[r[2]]+=r[3];const u=X.ord[r[0]][3];U[u]=(U[u]||0)+r[3]});
+ const tot=T.reduce((a,b)=>a+b,0)||1,ms=Object.keys(B).map(Number).sort((a,b)=>a-b);
+ $('cc').textContent=(Q.inc?'Incluye':'Sin')+' órdenes de proyectos · costo real de las órdenes (KOB1), sin la liquidación.';
+ $('ck').innerHTML=`<div class="card kpi"><h3>Costo total (COP)</h3><div class="v">${mm(tot)}</div><div class="m">${fmt(R.length)} registros de costo</div></div>`+[0,1,2].map(g=>`<div class="card kpi"><h3>${GN[g]}</h3><div class="v">${mm(T[g])}</div><div class="m">${fmt(T[g]/tot*100)}% del total</div></div>`).join('');
+ const W=560,H=280,l=44,r=8,t=14,b=26,w=W-l-r,h=H-t-b,mx=Math.max(...ms.map(m=>B[m].reduce((a,c)=>a+c,0)),1)*1.1,bw=w/Math.max(ms.length,1);let s='';
+ for(let i=0;i<=4;i++){const y=t+h-h*i/4;s+=`<line x1="${l}" x2="${W-r}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${l-5}" y="${y+4}" text-anchor="end">${fmt(mx*i/4/1e6)}M</text>`}
+ ms.forEach((m,i)=>{let y=t+h;B[m].forEach((v,g)=>{const bh=h*v/mx;y-=bh;s+=`<rect x="${l+i*bw+bw*.15}" y="${y}" width="${bw*.7}" height="${bh}" fill="${GC[g]}"><title>${MN[m]} · ${GN[g]}: ${mm(v)}</title></rect>`});s+=`<text x="${l+i*bw+bw/2}" y="${H-8}" text-anchor="middle">${MN[m].slice(0,3)}</text>`});
+ $('cm').innerHTML=s;$('cl').innerHTML=GN.map((n,g)=>`<span style="color:${GC[g]}">■</span> ${n}`).join(' &nbsp; ');
+ $('cu').innerHTML='<thead><tr><th>Ubicación técnica</th><th>Costo</th><th>%</th></tr></thead><tbody>'+Object.entries(U).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([u,v])=>`<tr><td style="white-space:normal;font-size:13px">${X.u[u]}</td><td>${mm(v)}</td><td>${fmt(v/tot*100,1)}%</td></tr>`).join('')+'</tbody>'}
+function perKg(X){const K=[0,0,0],A=dS(Q.a),B=dS(Q.b);DATA.days.forEach(x=>{if(x.d>=A&&x.d<=B)x.kg.forEach((v,i)=>{K[i<10?0:1]+=v;K[2]+=v})});
+ const C=[0,1,2].map(()=>[0,0,0,0]);X.crow.forEach(r=>{if(r[1]<Q.a||r[1]>Q.b)return;const o=X.ord[r[0]];if(Q.inc||!o[5])C[o[6]][r[2]]+=r[3]});
+ const R=[['Centro 1000 (P02–P12)',C[0],K[0]],['Centro 2000 (P14)',C[1],K[1]],['Otros (bodegas y servicios)',C[2],0],['Total',[0,1,2,3].map(g=>C.reduce((s,c)=>s+c[g],0)),K[2]]];
+ $('kg').innerHTML='<thead><tr><th>Centro</th><th>Costo</th><th>kg producidos</th><th>COP por kg</th><th>Mano de obra</th><th>Materiales</th><th>Servicios y otros</th></tr></thead><tbody>'+R.map(([n,c,k],i)=>{const t=c[0]+c[1]+c[2]+c[3],f=v=>k?fmt(v/k,1):'—';return`<tr ${i===3?'style="border-top:2px solid var(--ink)"':''}><td><b>${n}</b></td><td>${mm(t)}</td><td>${k?fmt(k):'—'}</td><td><b>${f(t)}</b></td><td>${f(c[0])}</td><td>${f(c[1])}</td><td>${f(c[2]+c[3])}</td></tr>`}).join('')+'</tbody>'}
+function orders(X){const q=QS.o,m={};X.crow.forEach(r=>{if(r[1]<q.a||r[1]>q.b||!okO(X,r[0],q))return;(m[r[0]]=m[r[0]]||[0,0,0,0])[r[2]]+=r[3]});
+ const A=Object.entries(m).map(([i,c])=>({o:X.ord[i],c,t:c[0]+c[1]+c[2]+c[3]})),Hh=A.filter(x=>x.o[9]).sort((a,b)=>b.t-a.t),Oo=A.filter(x=>!x.o[9]).sort((a,b)=>b.t-a.t),sum=a=>a.reduce((s,x)=>s+x.t,0),n=$('ov').checked?50:15,wm=$('omo').checked,wo=$('oot').checked;
+ $('oc').textContent=`Período ${fd(dS(q.a))} al ${fd(dS(q.b))}. Costo real por orden (KOB1, sin liquidación). La mano de obra son las órdenes de notificación de horas; «áreas comunes» reúne bodegas, PTARI, lavado y secado y líneas Infinity.`;
+ const sel=(wm?Hh:[]).concat(wo?Oo:[]);
+ $('ok').innerHTML=[['Mano de obra (notificaciones de horas)',Hh],['Otras órdenes',Oo],['Total seleccionado',sel]].map(([nm,a])=>`<div class="card kpi"><h3>${nm}</h3><div class="v">${mm(sum(a))}</div><div class="m">${fmt(a.length)} órdenes</div></div>`).join('');
+ $('oh').hidden=!wm;$('oo').hidden=!wo;
+ const pl=x=>x.o[8]>=0?P[x.o[8]]:'Común',tx=x=>`<td style="text-align:left;white-space:normal;font-size:13px;min-width:180px">${x.o[2]}</td>`,ub=x=>`<td style="text-align:left;white-space:normal;font-size:13px">${X.u[x.o[3]]}</td>`,es=x=>x.o[7]?'Cerrada':'Abierta';
+ const th=sum(Hh)||1,to=sum(Oo)||1;
+ $('ot1').innerHTML='<thead><tr><th>Orden</th><th class="l">Texto</th><th>Planta</th><th class="l">Ubicación técnica</th><th>Estado</th><th>Costo</th><th>%</th></tr></thead><tbody>'+Hh.slice(0,n).map(x=>`<tr><td>${x.o[0]}</td>${tx(x)}<td>${pl(x)}</td>${ub(x)}<td>${es(x)}</td><td><b>${mm(x.t)}</b></td><td>${fmt(x.t/th*100,1)}%</td></tr>`).join('')+'</tbody>';
+ $('ot2').innerHTML='<thead><tr><th>Orden</th><th class="l">Texto</th><th>Planta</th><th class="l">Ubicación técnica</th><th class="l">Objeto técnico</th><th>Clase</th><th>Estado</th><th>Mano de obra</th><th>Materiales</th><th>Servicios y otros</th><th>Total</th><th>%</th></tr></thead><tbody>'+Oo.slice(0,n).map(x=>`<tr><td>${x.o[0]}</td>${tx(x)}<td>${pl(x)}</td>${ub(x)}<td style="text-align:left;white-space:normal;font-size:13px">${x.o[4]>=0?X.e[x.o[4]]:'—'}</td><td>${x.o[1]}</td><td>${es(x)}</td><td>${mm(x.c[0])}</td><td>${mm(x.c[1])}</td><td>${mm(x.c[2]+x.c[3])}</td><td><b>${mm(x.t)}</b></td><td>${fmt(x.t/to*100,1)}%</td></tr>`).join('')+'</tbody>'}
+function parts(X){const m={},q=QS.r;X.mr.forEach(r=>{if(r[2]<q.a||r[2]>q.b||!okO(X,r[1],q))return;const a=m[r[0]]||(m[r[0]]={v:0,q:0,s:new Set()});a.v+=r[3];a.q+=r[4];a.s.add(mo(r[2]))});
+ const L=Object.entries(m).map(([i,a])=>({c:X.mat[i][0],d:X.mat[i][1],u:X.mat[i][2],v:a.v,q:a.q,n:a.s.size})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v),tot=L.reduce((s,x)=>s+x.v,0)||1,nm=mo(q.b)-mo(q.a)+1;let c=0;
+ L.forEach(x=>{x.k=c<.8?'A':c<.95?'B':'C';c+=x.v/tot;x.p=X.pend[x.c]});const A=L.filter(x=>x.k==='A');
+ $('rk').innerHTML=[['Consumo total',mm(tot),'COP en el período'],['Materiales con consumo',fmt(L.length),'referencias distintas'],['Clase A',fmt(A.length),fmt(A.reduce((s,x)=>s+x.v,0)/tot*100)+'% del valor'],['Clase A con compra pendiente',fmt(A.filter(x=>x.p).length),'según ME2N']].map(x=>`<div class="card kpi"><h3>${x[0]}</h3><div class="v">${x[1]}</div><div class="m">${x[2]}</div></div>`).join('');
+ $('rt').innerHTML='<thead><tr><th>Código</th><th class="l">Descripción</th><th>ABC</th><th>Consumo</th><th>Cantidad</th><th>Meses con consumo</th><th class="l">Pendiente ME2N</th></tr></thead><tbody>'+L.slice(0,12).map(x=>`<tr><td>${x.c}</td><td style="text-align:left;white-space:normal;font-size:13px">${x.d}</td><td><b>${x.k}</b></td><td>${mm(x.v)}</td><td>${fmt(x.q)} ${x.u}</td><td>${x.n} de ${nm}</td><td style="text-align:left;font-size:13px">${x.p?fmt(x.p[0])+' '+x.u+(x.p[2]?' · '+fd(x.p[2]):''):'—'}</td></tr>`).join('')+'</tbody>'}
+function sal(X){const k=$('sv').value,ix=k==='p'?1:2,nm=k==='p'?X.ppl:X.usr,m={},W={},nw=Math.floor((Q.b-Q.a)/7)+1;
+ X.sal.forEach(r=>{if(r[0]<Q.a||r[0]>Q.b)return;const a=m[r[ix]]||(m[r[ix]]={n:0,v:0,d:new Set(),l:0});a.n+=r[3];a.v+=r[4];a.d.add(r[0]);a.l=Math.max(a.l,r[0]);const w=Math.floor((r[0]-Q.a)/7);W[w]=(W[w]||0)+r[3]});
+ const L=Object.entries(m).sort((a,b)=>b[1].v-a[1].v),tot=L.reduce((s,x)=>s+x[1].v,0)||1;
+ $('st').innerHTML='<thead><tr><th class="l">'+(k==='p'?'Quien retira':'Quien registra')+`</th><th>Líneas</th><th>Valor</th><th>%</th><th>Días con salidas</th><th>Última salida</th></tr></thead><tbody>`+L.slice(0,15).map(([i,a])=>`<tr><td style="white-space:normal;font-size:13px"><b>${nm[i]}</b></td><td>${fmt(a.n)}</td><td>${mm(a.v)}</td><td>${fmt(a.v/tot*100,1)}%</td><td>${a.d.size}</td><td>${fd(dS(a.l))}</td></tr>`).join('')+`<tr style="border-top:2px solid var(--ink)"><td><b>Total (${L.length} personas)</b></td><td>${fmt(L.reduce((s,x)=>s+x[1].n,0))}</td><td><b>${mm(tot)}</b></td><td></td><td></td><td></td></tr></tbody>`;
+ const mx=Math.max(...Object.values(W),1)*1.1,Wd=400,l=40,t=10,b=24,w=Wd-l-6,h=260-t-b,bw=w/nw;let s='';
+ for(let i=0;i<=4;i++){const y=t+h-h*i/4;s+=`<line x1="${l}" x2="${Wd-6}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${l-5}" y="${y+4}" text-anchor="end">${fmt(mx*i/4)}</text>`}
+ for(let i=0;i<nw;i++){const v=W[i]||0,bh=h*v/mx;s+=`<rect x="${l+i*bw+bw*.12}" y="${t+h-bh}" width="${bw*.76}" height="${bh}" fill="var(--acc)"><title>Semana del ${fd(dS(Q.a+i*7))}: ${fmt(v)} líneas</title></rect>`+(nw<=14||i%Math.ceil(nw/10)===0?`<text x="${l+i*bw+bw/2}" y="${255}" text-anchor="middle">${dS(Q.a+i*7).slice(5).split('-').reverse().join('/')}</text>`:'')}
+ $('sc').innerHTML=s}
+function alerts(){const X=DATA.cx,ev=DATA.ev,N=+$('an').value||3,Hh=+$('ah').value||8,F=+$('af').value||2,A=dS(Q.a),B=dS(Q.b),len=Q.b-Q.a+1,pm=P.map(()=>0),pn=P.map(()=>0);if(!ev.length)return;
+ DATA.days.forEach(x=>x.pm.forEach((v,i)=>pm[i]+=v));ev.forEach(e=>pn[e.p]++);const G={};ev.filter(e=>Q.pl===-9||e.p===Q.pl).forEach(e=>(G[e.p+'|'+e.o]=G[e.p+'|'+e.o]||[]).push(e));const cost={};X.objc.forEach(a=>cost[a[0]+'|'+a[1]]=a[2]);
+ const R=Object.entries(G).map(([k,a])=>{const w=a.filter(e=>e.d>=A&&e.d<=B),p=a[0].p,h=w.reduce((s,e)=>s+e.h,0),mx=Math.max(0,...w.map(e=>e.h*60)),base=Q.a>=14?a.filter(e=>e.d<A).length/(Q.a/len):0,tp=pn[p]?pm[p]/pn[p]:0,
+  f=[w.length>=N&&'Reincidencia',Q.a>=14&&w.length>=2&&w.length>2*base&&'Frecuencia en aumento',(h>=Hh||(tp&&mx>F*tp))&&'Duración'].filter(Boolean);return{p,o:a[0].o,n:w.length,h,mx,base,f,c:cost[k]||0}}).filter(r=>r.n&&r.f.length).sort((a,b)=>b.f.length-a.f.length||b.h-a.h);
+ $('ac').textContent=`Período: ${fd(A)} al ${fd(B)}. ${R.length} objetos técnicos con al menos una alerta; se muestran los de mayor severidad. «Frecuencia en aumento» compara con el promedio de los períodos anteriores del mismo largo (solo si hay 14 días o más antes). «Duración»: horas sobre el umbral o un paro mayor a ${F} veces el TMPR de la planta.`;
+ $('at').innerHTML='<thead><tr><th>Planta</th><th class="l">Objeto técnico</th><th>Paros</th><th>Horas</th><th>Promedio previo</th><th>Paro mayor (min)</th><th>Costo órdenes año</th><th class="l">Alertas</th></tr></thead><tbody>'+R.slice(0,$('av').checked?25:5).map(r=>`<tr><td><b>${P[r.p]}</b></td><td style="text-align:left;white-space:normal;font-size:13px">${DATA.obj[r.o]||'Sin objeto técnico'}</td><td>${r.n}</td><td>${fmt(r.h,1)}</td><td>${fmt(r.base,1)}</td><td>${fmt(r.mx)}</td><td>${r.c?mm(r.c):'—'}</td><td style="text-align:left;white-space:normal">${r.f.map(x=>`<span class="chip">${x}</span>`).join('')}</td></tr>`).join('')+'</tbody>'}
+function solped(){const X=DATA.cx;if(!X.sp){$('spc').textContent='Este libro no trae la hoja ME5A; agrégala para ver las solicitudes sin pedido.';$('spk').innerHTML=$('spt').innerHTML='';return}
+ const q=QS.s,ref=dN(X.spl),R=X.sp.filter(r=>r[0]>=q.a&&r[0]<=q.b&&(!q.c||r[8]===q.c)&&(!q.g||r[9]===q.g)&&(!q.s||r[10]===q.s)).map(r=>({r,age:ref-r[0]})),tot=R.reduce((s,x)=>s+x.r[7],0);
+ R.sort($('sso').value==='v'?(a,b)=>b.r[7]-a.r[7]:(a,b)=>b.age-a.age);
+ $('spc').textContent='Solicitudes liberadas que todavía no tienen pedido (ME5A), sin las posiciones marcadas para borrado. La antigüedad se mide al '+fd(dS(ref))+'.';
+ $('spk').innerHTML=[['Posiciones sin pedido',fmt(R.length),fmt(new Set(R.map(x=>x.r[1])).size)+' solicitudes'],['Valor',mm(tot),'precio de valoración'],['Antigüedad media',R.length?fmt(R.reduce((s,x)=>s+x.age,0)/R.length)+' días':'—','desde la fecha de solicitud'],['Más antigua',R.length?fmt(Math.max(...R.map(x=>x.age)))+' días':'—','con el filtro actual']].map(x=>`<div class="card kpi"><h3>${x[0]}</h3><div class="v">${x[1]}</div><div class="m">${x[2]}</div></div>`).join('');
+ $('spt').innerHTML='<thead><tr><th>Solicitud</th><th>Pos.</th><th>Material</th><th class="l">Texto breve</th><th>Cantidad</th><th>Valor (COP)</th><th>Fecha</th><th>Antigüedad (días)</th><th>Grupo compras</th><th>Centro</th><th class="l">Solicitante</th></tr></thead><tbody>'+R.slice(0,$('ssv').checked?50:15).map(({r,age})=>`<tr><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]||'—'}</td><td style="text-align:left;white-space:normal;font-size:13px;min-width:200px">${r[4]}</td><td>${fmt(r[5],1)} ${r[6]}</td><td>${fmt(r[7])}</td><td>${fd(dS(r[0]))}</td><td><b>${age}</b></td><td>${r[9]}</td><td>${r[8]}</td><td style="text-align:left">${r[10]}</td></tr>`).join('')+'</tbody>'}
+function objChart(es){
+ const f=S.p>=0?es.filter(e=>e.p===S.p):es,m={};f.forEach(e=>{const o=DATA.obj[e.o]||'Sin objeto técnico';m[o]=m[o]||{h:0,n:0};m[o].h+=e.h;m[o].n++});
+ const L=Object.entries(m).sort((a,b)=>b[1].h-a[1].h),tot=L.reduce((s,x)=>s+x[1].h,0),top=L.slice(0,12);
+ $('th').textContent='Paradas por objeto técnico · '+(S.p>=0?P[S.p]:'todas las plantas');
+ const W=640,r=30,lw=210,bh=24,H=top.length*bh+10,mx=top.length?top[0][1].h:1;let s='',c=0;
+ if(!top.length)s='<text x="10" y="30">Sin avisos con parada en este período.</text>';
+ top.forEach((x,i)=>{c+=x[1].h;const y=5+i*bh,w=(W-lw-r-60)*x[1].h/mx;
+  s+=`<text class="t" x="${lw-8}" y="${y+16}" text-anchor="end">${x[0].length>32?x[0].slice(0,31)+'…':x[0]}</text><rect x="${lw}" y="${y+3}" width="${Math.max(w,2)}" height="${bh-8}" rx="3" fill="var(--acc)"><title>${x[0]}: ${fmt(x[1].h,1)} h, ${x[1].n} avisos</title></rect><text x="${lw+w+6}" y="${y+16}">${fmt(x[1].h,1)} h · ${x[1].n}</text><text x="${W}" y="${y+16}" text-anchor="end">${fmt(c/tot*100)}%</text>`});
+ $('obj').setAttribute('viewBox',`0 0 ${W} ${Math.max(H,40)}`);$('obj').innerHTML=s;
+}
+function trend(){
+ const byW=S.m>=0,g={};DATA.days.filter(x=>S.m<0||x.m===S.m).forEach(x=>{const k=byW?x.w:x.m;g[k]=(g[k]||0)+(S.p>=0?x.pm[S.p]:x.pm.reduce((a,b)=>a+b,0))/60});
+ const ks=Object.keys(g).map(Number).filter(k=>g[k]>0||byW||k<=DATA.last),v=ks.map(k=>g[k]),mx=Math.max(...v,1)*1.1,W=400,l=36,t=14,b=26,w=W-l-8,h=300-t-b,bw=w/v.length;let s='';
+ for(let i=0;i<=4;i++){const y=t+h-h*i/4;s+=`<line x1="${l}" x2="${W-8}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${l-5}" y="${y+4}" text-anchor="end">${fmt(mx*i/4)}</text>`}
+ ks.forEach((k,i)=>{const x=l+i*bw+bw*.15,bhh=h*v[i]/mx,on=byW?k===S.w:k===S.m;
+  s+=`<rect x="${x}" y="${t+h-bhh}" width="${bw*.7}" height="${bhh}" rx="2" fill="${on?'var(--ko)':'var(--acc)'}"><title>${byW?'Semana '+k:MN[k]}: ${fmt(v[i],1)} h</title></rect>`+(v.length<=14||i%2===0?`<text x="${x+bw*.35}" y="${300-9}" text-anchor="middle">${byW?k:MN[k].slice(0,3)}</text>`:'')});
+ $('trend').innerHTML=s;$('tt').textContent='Horas de parada por '+(byW?'semana':'mes');$('tc').textContent=(S.p>=0?P[S.p]:'Todas las plantas')+(S.m>=0?' · '+MN[S.m]:' · 2026');
+}
+function filters(){
+ const ms=[...new Set(DATA.days.filter(x=>x.pm.some(v=>v>0)).map(x=>x.m))];
+ $('fm').innerHTML='<option value="-1">Todos los meses</option>'+ms.map(m=>`<option value="${m}">${MN[m]}</option>`).join('');
+ $('fp').innerHTML='<option value="-1">Todas las plantas</option>'+P.map((p,i)=>`<option value="${i}">${p}</option>`).join('');weeks();
+}
+function weeks(){const ws=[...new Set(DATA.days.filter(x=>(S.m<0||x.m===S.m)&&x.pm.some(v=>v>0)).map(x=>x.w))];
+ $('fw').innerHTML='<option value="0">Todas las semanas</option>'+ws.map(w=>`<option value="${w}">Semana ${w}</option>`).join('');S.w=0}
+$('fm').onchange=e=>{S.m=+e.target.value;weeks();render()};$('fw').onchange=e=>{S.w=+e.target.value;render()};$('fi').onchange=weekly;$('fp').onchange=e=>{S.p=+e.target.value;render()};
+// ---- Carga de un nuevo Excel (se procesa en tu navegador; no se sube a ningún servidor)
+const iso=d=>d instanceof Date?new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10):null;
+function parse(wb){
+ const sn=wb.SheetNames,find=n=>wb.Sheets[sn.find(s=>s.trim().toLowerCase().startsWith(n))];
+ const oee=find('datos entrada oee'),iw=find('iw28');if(!oee||!iw)throw new Error('Faltan las hojas «Datos Entrada OEE» e «IW28».');
+ const R=XLSX.utils.sheet_to_json(oee,{header:1,raw:true,cellDates:true}),hr=R.findIndex(r=>r[1]==='Fecha');
+ if(hr<0)throw new Error('No encontré la fila de encabezados («Fecha») en Datos Entrada OEE.');
+ const col=n=>R[hr].findIndex(c=>typeof c==='string'&&c.trim().startsWith(n)),c={t:col('Tiempo Planificado'),pm:col('Paradas Mecánicas'),kg:col('Total Kilos')};
+ const days=[];for(let i=hr+2;i<R.length;i++){const r=R[i],d=iso(r[1]);if(!d)continue;const g=k=>P.map((_,j)=>+r[c[k]+j]||0);
+  const x={d,w:+r[3]||0,m:new Date(r[1]).getMonth(),t:g('t'),pm:g('pm'),kg:g('kg')};days.push(x)}
+ const I=XLSX.utils.sheet_to_json(iw,{raw:true,cellDates:true}),ev=[],obj=[];
+ I.forEach(r=>{const dur=+r['Duración de parada']||0,d=iso(r['Inicio de avería']),u=String(r['Denominación de la ubicación técnica']||'').match(/(\d+)\s*$/);
+  if(dur>0&&d&&u&&String(r['Parada']||'').trim()==='X'){const p=PN.indexOf(+u[1]);if(p<0)return;const o=r['Denominación de objeto técnico']||'';let k=obj.indexOf(o);if(k<0){obj.push(o);k=obj.length-1}ev.push({d,p,o:k,h:dur})}});
+ const used=days.filter(x=>x.pm.some(v=>v>0));
+ return{days:days.filter(x=>x.d<=used[used.length-1].d),ev,obj,last:11}
+}
+$('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('msg').textContent='Leyendo '+f.name+'…';
+ try{if(typeof XLSX==='undefined')throw new Error('No se pudo cargar el lector de Excel; revisa la conexión.');
+  const wb=XLSX.read(await f.arrayBuffer(),{type:'array',cellDates:true});const cx0=DATA.cx;DATA=parse(wb);DATA.cx=cx0;S.m=-1;S.p=-1;S.w=0;filters();render();
+  $('msg').textContent='Datos actualizados con '+f.name;$('src').textContent=''}catch(x){$('msg').textContent='Error: '+x.message}};
+$('b1').onclick=()=>tab(1);$('b2').onclick=()=>tab(2);$('b3').onclick=()=>tab(3);
+['av','sv','an','ah','af'].forEach(i=>$(i).onchange=render2);['omo','oot','ov'].forEach(i=>$(i).onchange=()=>orders(DATA.cx));
+// ---- Acceso por código: cada código descifra solo las llaves de las secciones de su rol
+const SK='tmm-sesion',ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0)),normC=c=>c.replace(/\D/g,'');
+const aesD=async(raw,o)=>new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(o.iv)},await crypto.subtle.importKey('raw',ub(raw),'AES-GCM',false,['decrypt']),ub(o.ct)));
+const gunz=async u=>JSON.parse(await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+async function unlock(code){const m=await crypto.subtle.importKey('raw',new TextEncoder().encode(normC(code)),'PBKDF2',false,['deriveKey']),
+ k=await crypto.subtle.deriveKey({name:'PBKDF2',salt:ub(ENC.salt),iterations:ENC.it,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['decrypt']);
+ for(const o of ENC.keys){try{return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(o.iv)},k,ub(o.ct))))}catch(e){}}return null}
+async function start(u){DATA=await gunz(await aesD(u.k.ind,ENC.ind));if(u.k.cx)DATA.cx=await gunz(await aesD(u.k.cx,ENC.cx));
+ const vi=u.s.includes('indicadores'),vc=u.s.includes('costos')&&!!DATA.cx,va=!!(u.k.adm&&ENC.adm);
+ if(va){ADM=JSON.parse(new TextDecoder().decode(await aesD(u.k.adm,ENC.adm)));ME=u;admin()}
+ $('b1').hidden=!vi;$('b2').hidden=!vc;$('b3').hidden=!va;$('xl').hidden=!u.x;$('wn').textContent=u.n+' · '+u.r;
+ $('lg').hidden=true;$('app').hidden=false;filters();render();tab(vi?1:vc?2:3)}
+// ---- Módulo de administración: usuarios, códigos y permisos por rol
+// Los usuarios viajan cifrados en data.js con una llave que solo tienen los roles de administración.
+// Al guardar se vuelven a envolver las llaves de sección para cada código; los datos no se tocan.
+const REPO='mteran30/tablero-mantenimiento',SEC=[['indicadores','Indicadores'],['costos','Costos, repuestos y alertas']];
+let ADM=null,ME=null,DIRTY=false;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]),
+ bb=u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode(...u.subarray(i,i+8192));return btoa(s)},
+ debil=c=>/^(\d)\1{3}$/.test(c)||'01234567890'.includes(c)||'09876543210'.includes(c),
+ rndC=()=>{const u=new Set(ADM.usuarios.map(x=>x.codigo));let c;do c=String(crypto.getRandomValues(new Uint32Array(1))[0]%10000).padStart(4,'0');while(u.has(c)||debil(c));return c};
+function perm(r){const o=ADM.roles[r];if(!o)return'—';return[...SEC.filter(s=>o.secciones.includes(s[0])).map(s=>s[1]),o.excel&&'Botón Excel',o.admin&&'Administración'].filter(Boolean).join(' · ')||'Nada'}
+function problemas(){const E=[],W=[],cs={};
+ ADM.usuarios.forEach(u=>{const n=u.nombre.trim()||'(sin nombre)';if(!u.nombre.trim())E.push('Hay un usuario sin nombre.');
+  if(!/^\d{4}$/.test(u.codigo))E.push(`El código de «${n}» debe tener 4 dígitos.`);else if(debil(u.codigo))W.push(`El código de «${n}» es fácil de adivinar.`);
+  (cs[u.codigo]=cs[u.codigo]||[]).push(n)});
+ Object.entries(cs).forEach(([c,a])=>{if(a.length>1&&/^\d{4}$/.test(c))E.push(`Código repetido entre ${a.join(' y ')}.`)});
+ if(!ADM.usuarios.some(u=>ADM.roles[u.rol]&&ADM.roles[u.rol].admin))E.push('Debe quedar al menos un usuario con un rol de administración.');
+ Object.entries(ADM.roles).forEach(([r,o])=>{if(!o.secciones.length&&!o.admin)W.push(`El rol «${r}» no puede ver ninguna sección.`)});
+ return{E:[...new Set(E)],W}}
+function admin(){const R=Object.keys(ADM.roles),ch=(on,a)=>`<input type="checkbox" ${a} ${on?'checked':''}>`;
+ $('au').innerHTML='<thead><tr><th class="l">Nombre</th><th class="l">Rol</th><th class="l">Código</th><th class="l">Puede ver</th><th></th></tr></thead><tbody>'+ADM.usuarios.map((u,i)=>
+  `<tr><td><input class="ai" data-u="${i}" data-f="nombre" value="${esc(u.nombre)}" aria-label="Nombre"></td><td><select data-u="${i}" data-f="rol" aria-label="Rol">${R.map(r=>`<option value="${esc(r)}" ${r===u.rol?'selected':''}>${esc(r)}</option>`).join('')}</select></td>`+
+  `<td style="white-space:nowrap"><input class="ai ac" data-u="${i}" data-f="codigo" value="${esc(u.codigo)}" inputmode="numeric" maxlength="4" aria-label="Código"> <button class="sb" type="button" data-g="${i}">Nuevo</button></td>`+
+  `<td style="white-space:normal;font-size:13px;color:var(--mut)">${esc(perm(u.rol))}</td><td><button class="sb del" type="button" data-du="${i}">Eliminar</button></td></tr>`).join('')+'</tbody>';
+ $('ar').innerHTML='<thead><tr><th class="l">Rol</th>'+SEC.map(s=>`<th class="c">${s[1]}</th>`).join('')+'<th class="c">Botón Excel</th><th class="c">Administración</th><th class="c">Usuarios</th><th></th></tr></thead><tbody>'+R.map(r=>{const o=ADM.roles[r],n=ADM.usuarios.filter(u=>u.rol===r).length,a=`data-r="${esc(r)}"`;
+  return`<tr><td><input class="ai" ${a} data-f="rn" value="${esc(r)}" aria-label="Nombre del rol"></td>${SEC.map(s=>`<td class="c">${ch(o.secciones.includes(s[0]),a+` data-s="${s[0]}" aria-label="${s[1]}"`)}</td>`).join('')}<td class="c">${ch(o.excel,a+' data-f="excel" aria-label="Botón Excel"')}</td><td class="c">${ch(o.admin,a+' data-f="admin" aria-label="Administración"')}</td><td class="c">${n}</td><td><button class="sb del" type="button" data-dr="${esc(r)}" ${n?'disabled title="Tiene usuarios asignados"':''}>Eliminar</button></td></tr>`}).join('')+'</tbody>';
+ const {E,W}=problemas();$('ags').disabled=!!E.length||!DIRTY;tokUI();
+ $('ae').innerHTML=E.map(x=>`<span class="chip">✕ ${esc(x)}</span>`).join(' ')+W.map(x=>`<span class="chip" style="color:var(--wa);background:var(--wab)">! ${esc(x)}</span>`).join(' ')+(!E.length&&DIRTY?'<span class="ok">Hay cambios sin publicar.</span>':'')}
+const mark=()=>{DIRTY=true;$('am').textContent='';admin()};
+$('t3').addEventListener('change',e=>{const t=e.target,d=t.dataset;
+ if(d.u!=null){const u=ADM.usuarios[+d.u];u[d.f]=d.f==='codigo'?t.value.replace(/\D/g,'').slice(0,4):t.value.trim();if(d.f==='nombre'&&!u.nombre)u.nombre='';}
+ else if(d.r!=null){const o=ADM.roles[d.r];
+  if(d.s){o.secciones=SEC.map(s=>s[0]).filter(s=>s===d.s?t.checked:o.secciones.includes(s))}
+  else if(d.f==='rn'){const n=t.value.trim().toLowerCase();if(!n||(n!==d.r&&ADM.roles[n])){alert(n?'Ya existe un rol con ese nombre.':'El rol necesita un nombre.');admin();return}
+   const R={};Object.entries(ADM.roles).forEach(([k,v])=>R[k===d.r?n:k]=v);ADM.roles=R;ADM.usuarios.forEach(u=>{if(u.rol===d.r)u.rol=n})}
+  else o[d.f]=t.checked}
+ else return;mark()});
+$('t3').addEventListener('click',e=>{const d=e.target.dataset;
+ if(d.g!=null){ADM.usuarios[+d.g].codigo=rndC();mark()}
+ else if(d.du!=null){const u=ADM.usuarios[+d.du];if(confirm(`¿Eliminar a «${u.nombre}»? Su código dejará de funcionar al publicar.`)){ADM.usuarios.splice(+d.du,1);mark()}}
+ else if(d.dr!=null){if(confirm(`¿Eliminar el rol «${d.dr}»?`)){delete ADM.roles[d.dr];mark()}}});
+$('anu').onclick=()=>{ADM.usuarios.push({nombre:'Nuevo usuario',rol:Object.keys(ADM.roles).find(r=>!ADM.roles[r].admin)||Object.keys(ADM.roles)[0],codigo:rndC()});mark();const l=document.querySelectorAll('#au input[data-f="nombre"]');l[l.length-1].select()};
+$('anr').onclick=()=>{let i=1;while(ADM.roles['rol '+i])i++;ADM.roles['rol '+i]={secciones:['indicadores'],excel:false,admin:false};mark()};
+async function generar(){const enc=async(raw,txt)=>{const iv=crypto.getRandomValues(new Uint8Array(12)),k=await crypto.subtle.importKey('raw',raw,'AES-GCM',false,['encrypt']);return{iv:bb(iv),ct:bb(new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},k,new TextEncoder().encode(txt))))}};
+ const salt=crypto.getRandomValues(new Uint8Array(16)),keys=[];
+ for(const u of ADM.usuarios){const r=ADM.roles[u.rol],k={ind:ME.k.ind};if(r.secciones.includes('costos')||r.admin)k.cx=ME.k.cx;if(r.admin)k.adm=ME.k.adm;
+  const m=await crypto.subtle.importKey('raw',new TextEncoder().encode(u.codigo),'PBKDF2',false,['deriveBits']),
+   kek=new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations:ENC.it,hash:'SHA-256'},m,256));
+  keys.push(await enc(kek,JSON.stringify({n:u.nombre,r:u.rol,s:r.secciones,x:!!r.excel,a:!!r.admin,k})))}
+ keys.sort(()=>Math.random()-.5);
+ const E={...ENC,salt:bb(salt),keys,adm:await enc(ub(ME.k.adm),JSON.stringify(ADM))};return{E,txt:'var ENC='+JSON.stringify(E)+';\n'}}
+// Guardar = cifrar los accesos y publicar data.js en GitHub en un solo paso.
+// El token se pide la primera vez y, si se marca «Recordar», queda solo en este navegador.
+const TK='tmm-gh',getTk=()=>{try{return localStorage.getItem(TK)||''}catch(x){return''}},setTk=v=>{try{v?localStorage.setItem(TK,v):localStorage.removeItem(TK)}catch(x){}};
+let LAST='',ASK=false;
+function tokUI(){const has=!!getTk();$('atw').hidden=has&&!ASK;$('atc').hidden=!has||ASK}
+$('atc').onclick=()=>{ASK=true;tokUI();$('atk').focus()};
+async function publicar(t,tk){const url=`https://api.github.com/repos/${REPO}/contents/data.js`,h={Authorization:'Bearer '+tk,Accept:'application/vnd.github+json'};
+ const r0=await fetch(url+'?ref=main',{headers:h});if(r0.status===401){const e=new Error('el token de GitHub no es válido o venció.');e.tok=1;throw e}
+ if(!r0.ok)throw new Error('GitHub respondió '+r0.status+'.');
+ const r1=await fetch(url,{method:'PUT',headers:h,body:JSON.stringify({message:'Actualiza usuarios y permisos',content:btoa(t),sha:(await r0.json()).sha,branch:'main'})});
+ if(r1.status===401||r1.status===403||r1.status===404){const e=new Error('el token no tiene permiso de escritura en '+REPO+'.');e.tok=1;throw e}
+ if(!r1.ok)throw new Error('GitHub respondió '+r1.status+'.')}
+$('ags').onclick=async()=>{if(problemas().E.length)return;const tk=$('atk').value.trim()||(ASK?'':getTk());
+ if(!tk){ASK=true;tokUI();$('am').textContent='Para publicar, escribe un token de GitHub con permiso de escritura en '+REPO+' y vuelve a pulsar «Guardar cambios».';$('atk').focus();return}
+ $('ags').disabled=true;$('agd').hidden=true;$('am').textContent='Guardando '+ADM.usuarios.length+' usuarios…';
+ try{const g=await generar();LAST=g.txt;$('am').textContent='Publicando…';await publicar(g.txt,tk);
+  if($('atr').checked)setTk(tk);$('atk').value='';ASK=false;ENC=g.E;DIRTY=false;admin();$('am').textContent='✓ Cambios guardados y publicados. El link se actualiza en uno o dos minutos.'}
+ catch(x){if(x.tok){setTk('');ASK=true}$('am').textContent='No se publicó: '+x.message+' Tus cambios siguen aquí; puedes reintentar o descargar una copia.';$('agd').hidden=!LAST;admin()}};
+$('agd').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([LAST],{type:'text/javascript'}));a.download='data.js';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1e4)};
+addEventListener('beforeunload',e=>{if(DIRTY){e.preventDefault();e.returnValue=''}});
+$('lf').onsubmit=async e=>{e.preventDefault();const c=$('lc').value;if(normC(c).length!==4){$('le').textContent='El código debe tener 4 dígitos.';return}
+ $('le').textContent='Verificando…';try{const u=await unlock(c);if(!u){$('le').textContent='Código no válido.';return}
+  try{sessionStorage.setItem(SK,JSON.stringify(u))}catch(x){}$('le').textContent='';$('lc').value='';await start(u)}catch(x){$('le').textContent='No se pudo abrir el tablero: '+x.message}};
+$('lc').oninput=e=>{e.target.value=normC(e.target.value).slice(0,4);if(e.target.value.length===4)$('lf').requestSubmit()};
+$('lo').onclick=()=>{try{sessionStorage.removeItem(SK)}catch(x){}location.reload()};
+(async()=>{let u=null;try{u=JSON.parse(sessionStorage.getItem(SK))}catch(x){}if(u&&u.k)try{await start(u);return}catch(x){try{sessionStorage.removeItem(SK)}catch(y){}}$('lc').focus()})();
+</script></body></html>

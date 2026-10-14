@@ -1,0 +1,7 @@
+# Libros fuente de SAP/Excel (no se publican)
+*.xlsx
+*.xlsm
+*.xls
+~$*
+Thumbs.db
+.DS_Store
